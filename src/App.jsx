@@ -1,5 +1,5 @@
-import Home from "./page/Home"
-import VoucherTypeMaster from "./page/VoucherTypeMaster"
+import Home from "./page/components/Home"
+
 
 
 function App() {
@@ -7,8 +7,9 @@ function App() {
 
   return (
     <>
-      <Home />
       
+      <Home />
+
     </>
   )
 }
