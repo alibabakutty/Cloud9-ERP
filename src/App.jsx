@@ -1,4 +1,4 @@
-import Home from "./page/components/Home"
+import VoucherTypeCreate from "./page/components/VoucherTypeCreate"
 
 
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       
-      <Home />
+      <VoucherTypeCreate />
 
     </>
   )
