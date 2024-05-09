@@ -27,7 +27,7 @@ const NewLedgerCreate = () => {
                 </div>
 
                 <div className='main-form '>
-                    <form action="">
+                    <form >
                         <div className='w-full'>
                             <div className='top-ldgr-main flex '>
                                 <div className='top-ldgr border-b pl-2 h-[17vh] w-[80%] flex flex-wrap' >
@@ -38,8 +38,8 @@ const NewLedgerCreate = () => {
                                     </div>
 
                                     <div className='input-ldgr flex items-start mr-4 mt-1 ' style={{width: '40%'}}>
-                                        <label htmlFor="tallySerielNo" className='text-sm mr-7' style={{ color: 'blue' }}>Tally Serial No</label>
-                                        : <input type="text" id='tallySerielNo' name='tallySerielNo' className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
+                                        <label htmlFor="tallySerialNo" className='text-sm mr-7' style={{ color: 'blue' }}>Tally Serial No</label>
+                                        : <input type="text" id='tallySerialNo' name='tallySerialNo' className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
                                     </div>
                                     
 
@@ -249,8 +249,8 @@ const NewLedgerCreate = () => {
                                 </div>
 
                                 <div className='input-ldgr'>
-                                    <label htmlFor="gstinOrUin" className='mr-[124px]'>GSTIN/UIN</label>
-                                    : <input type="text" id='gstinOrUin' name='gstinOrUin' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    <label htmlFor="gstOrUin" className='mr-[124px]'>GSTIN/UIN</label>
+                                    : <input type="text" id='gstOrUin' name='gstOrUin' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
