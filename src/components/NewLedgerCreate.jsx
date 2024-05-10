@@ -1,16 +1,67 @@
 import React, { useState } from 'react'
 import { IoClose } from "react-icons/io5";
+import { createNewLedger } from '../services/NewLedgerCreateService';
+import { useNavigate } from 'react-router-dom';
 
 
 const NewLedgerCreate = () => {
 
-    const [inputValue, setInputValue] =useState('');
+    const [newLedgers, setNewLedgers] = useState([])
 
-    const handleChange = (e) => {
+    const [ledgerName, setLedgerName] = useState('')
+    const [tallySerialNo, setTallySerialNo] = useState('')
+    const [aliasName, setAliasName] = useState('')
+    const [underGroup, setUnderGroup] = useState('')
+    const [mailingName, setMailingName] = useState('')
+    const [addressOne, setAddressOne] = useState('')
+    const [addressTwo, setAddressTwo] = useState('')
+    const [addressThree, setAddressThree] = useState('')
+    const [addressFour, setAddressFour] = useState('')
+    const [addressFive, setAddressFive] = useState('')
+    const [stateName, setStateName] = useState('')
+    const [countryName, setCountryName] = useState('')
+    const [pinCode, setPinCode] = useState('')
+    const [provideBankDetails, setProvideBankDetails] = useState('')
+    const [panOrItNumber, setPanOrItNumber] = useState('')
+    const [registrationType, setRegistrationType] = useState('')
+    const [gstOrUin, setGstOrUin] = useState('')
+    const [setOrAlterGstDetails, setSetOrAlterGstDetails] = useState('')
+
+    
+
+
+
+    const navigator = useNavigate();
+
+    const handleMailingNameChange = (e) => {
         const newValue = e.target.value;
-        const capitalizedValue = newValue.split(" ").map(word => word.charAt(0).toUpperCase()+word.slice(1)).join(" ");
-        setInputValue(capitalizedValue);
+        const capitalizedValue = newValue.charAt(0).toUpperCase() + newValue.slice(1);
+        setMailingName(capitalizedValue);
     };
+    
+    const handleLedgerNameChange = (e) => {
+        const newValue = e.target.value;
+        const capitalizedValue = newValue.charAt(0).toUpperCase() + newValue.slice(1);
+        setLedgerName(capitalizedValue);
+    };
+    
+
+    
+
+    function saveLedger(e){
+        e.preventDefault();
+
+        const ledger = {ledgerName, tallySerialNo, aliasName, underGroup, addressOne, addressTwo, addressThree, addressFour, addressFive, stateName, countryName, pinCode, provideBankDetails, panOrItNumber, registrationType, gstOrUin, setOrAlterGstDetails}
+
+        console.log(ledger);
+
+        createNewLedger(ledger).then((response) => {
+            console.log(response.data);
+            navigator('/added')
+        }).catch((error) => {
+            console.error('Error creating Ledger:', error);
+        })
+    }
 
 
   return (
@@ -27,25 +78,25 @@ const NewLedgerCreate = () => {
                 </div>
 
                 <div className='main-form '>
-                    <form >
+                    <form>
                         <div className='w-full'>
                             <div className='top-ldgr-main flex '>
                                 <div className='top-ldgr border-b pl-2 h-[17vh] w-[80%] flex flex-wrap' >
                                     
                                     <div className='input-ldgr flex items-start mr-4 mt-1 ' style={{ width: '50%' }}>
                                         <label htmlFor="ledgerName" className='text-sm mr-12'>Name</label>
-                                        : <input type="text" id='ledgerName' name='ledgerName' value={inputValue} onChange={handleChange} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-[500px] focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
+                                        : <input type="text" id='ledgerName' name='ledgerName' value={ledgerName} onChange={(e) => {handleLedgerNameChange(e); setLedgerName(e.target.value)}} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-[500px] focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
                                     </div>
 
                                     <div className='input-ldgr flex items-start mr-4 mt-1 ' style={{width: '40%'}}>
                                         <label htmlFor="tallySerialNo" className='text-sm mr-7' style={{ color: 'blue' }}>Tally Serial No</label>
-                                        : <input type="text" id='tallySerialNo' name='tallySerialNo' className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
+                                        : <input type="text" id='tallySerialNo' name='tallySerialNo' value={tallySerialNo} onChange={(e) => {setTallySerialNo(e.target.value)}} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
                                     </div>
                                     
 
                                     <div className='input-ldgr flex items-start w-full -mt-11 '  >
                                         <label htmlFor="aliasName" className='text-sm italic mr-12'>(alias)</label>
-                                        : <input type="text" id='aliasName' name='aliasName' className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
+                                        : <input type="text" id='aliasName' name='aliasName' value={aliasName} onChange={(e) => {setAliasName(e.target.value)}} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
                                     </div>
                                     
 
@@ -61,7 +112,7 @@ const NewLedgerCreate = () => {
                         <div className='middle-box flex'>
                             <div className='input-ldgr h-[70vh] border w-1/2 text-sm'>
                                 <label htmlFor="underGroup" >Under</label>
-                                : <select name="underGroup" id="underGroup" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
+                                : <select name="underGroup" id="underGroup" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={underGroup} onChange={(e) => setUnderGroup(e.target.value)}>
                                     <option value="Bank Accounts">Bank Accounts</option>
                                     <option value="Bank OCC A/c">Bank OCC A/c</option>
                                     <option value="Bank OD A/c">Bank OD A/c</option>
@@ -99,38 +150,38 @@ const NewLedgerCreate = () => {
                                 <h2 className='underline font-semibold'>Mailing Details</h2>
 
                                 <div className='input-ldgr'>
-                                    <label htmlFor="" className='mr-[152px]'>Name</label>
-                                    : <input type="text" id='' name='' value={inputValue} onChange={handleChange} className=' w-[400px] h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
+                                    <label htmlFor="mailingName" className='mr-[152px]'>Name</label>
+                                    : <input type="text" id='mailingName' name='mailingName' value={mailingName} onChange={(e) => {handleMailingNameChange(e); setMailingName(e.target.value)}} className=' w-[400px] h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="address" className='mr-[140px]'>Address</label>
-                                    : <input type="text" id='address' name='address' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    : <input type="text" id='addressOne' name='addressOne' value={addressOne} onChange={(e) => {setAddressOne(e.target.value)}} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="" className='mr-[195px]'></label>
-                                    <input type="text" id='address' name='address' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    <input type="text" id='addressTwo' name='addressTwo' value={addressTwo} onChange={(e) => {setAddressTwo(e.target.value)}} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="" className='mr-[195px]'></label>
-                                    <input type="text" id='address' name='address' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    <input type="text" id='addressThree' name='addressThree' value={addressThree} onChange={(e) => {setAddressThree(e.target.value)}} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="" className='mr-[195px]'></label>
-                                    <input type="text" id='address' name='address' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    <input type="text" id='addressFour' name='addressFour' value={addressFour} onChange={(e) => {setAddressFour(e.target.value)}} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="" className='mr-[195px]'></label>
-                                    <input type="text" id='address' name='address' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    <input type="text" id='addressFive' name='addressFive' value={addressFive} onChange={(e) => {setAddressFive(e.target.value)}} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="stateName" className='mr-[158px]'>State</label>
-                                    : <select name="stateName" id="stateName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500  '>
+                                    : <select name="stateName" id="stateName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={stateName} onChange={(e) => setStateName(e.target.value)}>
                                         <option value="New State">New State</option>
                                         <option value="Change Country">Change Country</option>
                                         <option value="Not Applicable">&diams;Not Applicable</option>
@@ -174,7 +225,7 @@ const NewLedgerCreate = () => {
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="countryName" className='mr-[140px]'>Country</label>
-                                    : <select name="countryName" id="countryName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
+                                    : <select name="countryName" id="countryName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={countryName} onChange={(e) => setCountryName(e.target.value)}>
                                         <option value="New Country">New Country</option>
                                         <option value="Show More">Show More</option>
                                         <option value="Not Applicable">&diams;Not Applicable</option>
@@ -214,7 +265,7 @@ const NewLedgerCreate = () => {
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="pinCode" className='mr-[140px]'>Pincode</label>
-                                    : <input type="number" id='pinCode' name='pinCode' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    : <input type="number" id='pinCode' name='pinCode' value={pinCode} onChange={(e) => setPinCode(e.target.value)} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
@@ -223,7 +274,7 @@ const NewLedgerCreate = () => {
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="provideBankDetails" className='mr-[67px]'>Provide bank details</label>
-                                    : <select name="provideBankDetails" id="provideBankDetails" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
+                                    : <select name="provideBankDetails" id="provideBankDetails" value={provideBankDetails} onChange={(e) => setProvideBankDetails(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
                                         <option value="Yes">Yes</option>
                                         <option value="No" selected>No</option>
                                     </select>
@@ -235,12 +286,12 @@ const NewLedgerCreate = () => {
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="panOrItNumber" className='mr-[123px]'>PAN/IT No.</label>
-                                    : <input type="text" id='panOrItNumber' name='panOrItNumber' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    : <input type="text" id='panOrItNumber' name='panOrItNumber' value={panOrItNumber} onChange={(e) => setPanOrItNumber(e.target.value)} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="registrationType" className='mr-[85px]'>Registration Type</label>
-                                    : <select name="registrationType" id="registrationType" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
+                                    : <select name="registrationType" id="registrationType" value={registrationType} onChange={(e) => setRegistrationType(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
                                         <option value="Unknown">&diams;Unknown</option>
                                         <option value="Composition">Composition</option>
                                         <option value="Regular" selected>Regular</option>
@@ -250,12 +301,12 @@ const NewLedgerCreate = () => {
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="gstOrUin" className='mr-[124px]'>GSTIN/UIN</label>
-                                    : <input type="text" id='gstOrUin' name='gstOrUin' className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
+                                    : <input type="text" id='gstOrUin' name='gstOrUin' value={gstOrUin} onChange={(e) => setGstOrUin(e.target.value)} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
                                 <div className='input-ldgr'>
                                     <label htmlFor="setOrAlterGstDetails">Set/Alter additional GST details</label>
-                                    : <select name="setOrAlterGstDetails" id="setOrAlterGstDetails" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
+                                    : <select name="setOrAlterGstDetails" id="setOrAlterGstDetails" value={setOrAlterGstDetails} onChange={(e) => setSetOrAlterGstDetails(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
                                         <option value="Yes">Yes</option>
                                         <option value="No" selected>No</option>
                                     </select>
@@ -274,7 +325,9 @@ const NewLedgerCreate = () => {
 
                         <div className='flex justify-center'>
 
-                            <input className='text-sm px-8 py-1 border hover:bg-slate-400' type="submit" value="A: Accept" />
+                            {/* <input className='text-sm px-8 py-1 border hover:bg-slate-400' type="submit" value="A: Accept" /> */}
+
+                            <button type='submit' className='text-sm px-8 py-1 border hover:bg-slate-400' onClick={saveLedger}>A: Accept</button>
 
                         </div>   
 
