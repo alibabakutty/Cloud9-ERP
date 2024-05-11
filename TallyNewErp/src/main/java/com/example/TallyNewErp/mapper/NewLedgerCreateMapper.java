@@ -27,7 +27,8 @@ public class NewLedgerCreateMapper {
                 newledgercreate.getPanOrItNumber(),
                 newledgercreate.getRegistrationType(),
                 newledgercreate.getGstOrUin(),
-                newledgercreate.getSetOrAlterGstDetails()
+                newledgercreate.getSetOrAlterGstDetails(),
+                newledgercreate.getOpeningBalance()
         );
     }
 
@@ -51,7 +52,8 @@ public class NewLedgerCreateMapper {
                 newledgercreatedto.getPanOrItNumber(),
                 newledgercreatedto.getRegistrationType(),
                 newledgercreatedto.getGstOrUin(),
-                newledgercreatedto.getSetOrAlterGstDetails()
+                newledgercreatedto.getSetOrAlterGstDetails(),
+                newledgercreatedto.getOpeningBalance()
         );
     }
 }
