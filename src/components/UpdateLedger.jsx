@@ -1,121 +1,34 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { IoClose } from "react-icons/io5";
-import { createNewLedger } from '../services/NewLedgerCreateService';
-import { useNavigate } from 'react-router-dom';
 
-
-const NewLedgerCreate = () => {
-
-    
+const UpdateLedger = ({ ledger }) => {
 
     const [ledgerName, setLedgerName] = useState('')
     const [tallySerialNo, setTallySerialNo] = useState('')
     const [aliasName, setAliasName] = useState('')
-    const [underGroup, setUnderGroup] = useState('Capital Account')
+    const [underGroup, setUnderGroup] = useState('')
     const [mailingName, setMailingName] = useState('')
     const [addressOne, setAddressOne] = useState('')
     const [addressTwo, setAddressTwo] = useState('')
     const [addressThree, setAddressThree] = useState('')
     const [addressFour, setAddressFour] = useState('')
     const [addressFive, setAddressFive] = useState('')
-    const [stateName, setStateName] = useState('TamilNadu')
-    const [countryName, setCountryName] = useState('India')
+    const [stateName, setStateName] = useState('')
+    const [countryName, setCountryName] = useState('')
     const [pinCode, setPinCode] = useState('')
-    const [provideBankDetails, setProvideBankDetails] = useState('No')
+    const [provideBankDetails, setProvideBankDetails] = useState('')
     const [panOrItNumber, setPanOrItNumber] = useState('')
-    const [registrationType, setRegistrationType] = useState('Regular')
+    const [registrationType, setRegistrationType] = useState('')
     const [gstOrUin, setGstOrUin] = useState('')
-    const [setOrAlterGstDetails, setSetOrAlterGstDetails] = useState('No')
+    const [setOrAlterGstDetails, setSetOrAlterGstDetails] = useState('')
     const [openingBalance, setOpeningBalance] = useState('')
-    
-
-
-
-    const navigator = useNavigate();
-
-    const inputRef = useRef(null);
-
-
-    // const handleKeyPress = (e, nextInputRef) => {
-    //     if(e.key === 'Enter'){
-    //         e.preventDefault();
-    //         nextInputRef.current.focus();
-    //     }
-    // };
-
-
-
-    const handleMailingNameChange = (e) => {
-        const newValue = e.target.value;
-        const capitalizedValue = newValue.charAt(0).toUpperCase() + newValue.slice(1);
-        setMailingName(capitalizedValue);
-    };
-    
-    const handleLedgerNameChange = (e) => {
-        const newValue = e.target.value;
-        const capitalizedValue = newValue.charAt(0).toUpperCase() + newValue.slice(1);
-        setLedgerName(capitalizedValue);
-    };
-
-
-   
-    
-    // Validation function
-    const validateForm = () => {
-        let valid = true;
-        const errors = {};
-
-        if (!ledgerName.trim()) {
-            errors.ledgerName = 'Name is required';
-            valid = false;
-        }
-
-        // Other validation checks...
-
-        setErrors(errors);
-        return valid;
-    };
 
     
-
-    function saveLedger(e){
-        e.preventDefault();
-
-
-            if(validateForm()){
-            const ledger = {ledgerName, tallySerialNo, aliasName, underGroup, addressOne, addressTwo, addressThree, addressFour, addressFive, stateName, countryName, pinCode, provideBankDetails, panOrItNumber, registrationType, gstOrUin, setOrAlterGstDetails}
-
-            console.log(ledger);
-
-            createNewLedger(ledger).then((response) => {
-                console.log(response.data);
-                navigator('/added')
-            }).catch((error) => {
-                console.error('Error creating Ledger:', error);
-            })
-        }
-
-        
-    }
-
-    const [errors, setErrors] = useState({
-        ledgerName: '',
-        tallySerialNo: '',
-        
-    })
-
-
-    
-    const hanldeTabPress = (e) => {
-        if(e.key === 'Tab' && !validateForm()){
-            e.preventDefault();
-        }
-    }
 
 
   return (
     <div>
-        <div className='container'>
+       <div className='container'>
             <div className='top-ldgr w-[1230px]'>
                 <div className='ldgr-title bg-[#88bee6] flex justify-between h-4'>
                     <p className='text-[10px] font-semibold pl-4 text-black'>
@@ -134,7 +47,7 @@ const NewLedgerCreate = () => {
                                     
                                     <div className='input-ldgr flex items-start mr-4 mt-1 ' style={{ width: '50%' }}>
                                         <label htmlFor="ledgerName" className='text-sm mr-12'>Name</label>
-                                        : <input type="text" id='ledgerName' name='ledgerName' value={ledgerName} onChange={(e) => {handleLedgerNameChange(e); setLedgerName(e.target.value); setErrors({...errors, ledgerName: ''})}} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-[500px] focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off' ref={inputRef} onFocus={() => inputRef.current = 'ledgerName'} onKeyDown={hanldeTabPress} /> <br />
+                                        : <input type="text" id='ledgerName' name='ledgerName' value={ledgerName} onChange={(e) => { setLedgerName(e.target.value); }} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-[500px] focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off'   /> <br />
                                         
                                     </div>
 
@@ -147,7 +60,7 @@ const NewLedgerCreate = () => {
 
                                     <div className='input-ldgr flex items-start w-full -mt-11 '  >
                                         <label htmlFor="aliasName" className='text-sm italic mr-12'>(alias)</label>
-                                        : <input type="text" id='aliasName' name='aliasName' value={aliasName} onChange={(e) => {setAliasName(e.target.value)}} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' ref={inputRef} onFocus={() => inputRef.current = 'aliasName'} onKeyDown={hanldeTabPress} />
+                                        : <input type="text" id='aliasName' name='aliasName' value={aliasName} onChange={(e) => {setAliasName(e.target.value)}} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' autoComplete='off' />
                                     </div>
                                     
 
@@ -378,7 +291,7 @@ const NewLedgerCreate = () => {
 
                             {/* <input className='text-sm px-8 py-1 border hover:bg-slate-400' type="submit" value="A: Accept" /> */}
 
-                            <button type='submit' className='text-sm px-8 py-1 border-none hover:bg-slate-400' onClick={saveLedger}>A: Accept</button>
+                            {/* <button type='submit' className='text-sm px-8 py-1 border-none hover:bg-slate-400' onClick={saveLedger}>A: Accept</button> */}
 
                         </div>   
 
@@ -393,9 +306,8 @@ const NewLedgerCreate = () => {
             </div>
             
         </div>
-        
     </div>
   )
 }
 
-export default NewLedgerCreate
+export default UpdateLedger

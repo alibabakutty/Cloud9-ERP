@@ -3,6 +3,8 @@ import ListOfLedgerDetails from "./components/ListOfLedgerDetails"
 import NewLedgerCreate from "./components/NewLedgerCreate"
 import Gateway from "./components/Gateway"
 import LedgerAddedCheck from "./components/LedgerAddedCheck"
+import UpdateLedger from "./components/UpdateLedger"
+import SelectLedgerNameUpdate from "./components/SelectLedgerNameUpdate"
 
 
 
@@ -23,6 +25,10 @@ function App() {
           <Route path="/view" element ={<ListOfLedgerDetails />} />
           {/* http://localhost:3000/added */}
           <Route path="/added" element ={<LedgerAddedCheck />} />
+          {/* http://localhost:3000/updateselect */}
+          <Route path="/updateselect" element={<SelectLedgerNameUpdate />} />
+
+          <Route path="" element={<UpdateLedger />} />
         </Routes>
       </BrowserRouter>
       
