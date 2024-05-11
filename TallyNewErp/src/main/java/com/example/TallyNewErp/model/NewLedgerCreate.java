@@ -70,8 +70,8 @@ public class NewLedgerCreate {
     @Column(name = "set_or_alter_gst_details")
     private String setOrAlterGstDetails;
 
-
-
+    @Column(name = "opening_balance")
+    private String openingBalance;
 
 
 
