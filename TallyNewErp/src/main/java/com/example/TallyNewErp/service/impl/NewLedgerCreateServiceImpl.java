@@ -67,6 +67,7 @@ public class NewLedgerCreateServiceImpl implements NewLedgerCreateService {
         newLedgerCreate.setRegistrationType(updatedLedger.getRegistrationType());
         newLedgerCreate.setGstOrUin(updatedLedger.getGstOrUin());
         newLedgerCreate.setSetOrAlterGstDetails(updatedLedger.getSetOrAlterGstDetails());
+        newLedgerCreate.setOpeningBalance(updatedLedger.getOpeningBalance());
 
         NewLedgerCreate newLedgerCreateObj = newledgercreatedao.save(newLedgerCreate);
 

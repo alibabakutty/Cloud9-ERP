@@ -46,4 +46,6 @@ public class NewLedgerCreateDto {
 
     private String setOrAlterGstDetails;
 
+    private String openingBalance;
+
 }
