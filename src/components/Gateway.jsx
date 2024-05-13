@@ -18,7 +18,7 @@ const Gateway = () => {
                 </Link>
 
                 <Link to="/updateselect">
-                    <button className='p-2 bg-cyan-600 w-72 rounded-md mb-2'>Update Ledger Details</button>
+                    <button className='p-2 bg-cyan-600 w-72 rounded-md mb-2'>View Ledger Details</button>
                 </Link>
 
                 <Link>
