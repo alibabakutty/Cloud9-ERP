@@ -12,6 +12,7 @@ const NewLedgerCreate = () => {
     const [tallySerialNo, setTallySerialNo] = useState('')
     const [aliasName, setAliasName] = useState('')
     const [underGroup, setUnderGroup] = useState('Capital Account')
+    const [subUnder, setSubUnder] = useState('')
     const [mailingName, setMailingName] = useState('')
     const [addressOne, setAddressOne] = useState('')
     const [addressTwo, setAddressTwo] = useState('')
@@ -32,6 +33,46 @@ const NewLedgerCreate = () => {
 
 
     const navigator = useNavigate();
+
+    const handleUnderGroupChange = (e) => {
+        const newValue = e.target.value;
+        setUnderGroup(newValue);
+        updateSubUnder(newValue); // <-- Call the function like this
+    };
+    
+
+    const updateSubUnder = (underGroup) => {
+        switch(underGroup){
+            case "Bank Accounts":
+                setSubUnder("(Current Assets)")
+                break;
+            case "Bank OCC A/c":
+            case "Bank OD A/c":
+            case "Secured Loans":
+            case "Unsecured Loans":
+                setSubUnder("Loans(Liability)");
+                break;
+            case "Cash-in-Hand":
+            case "Deposits (Asset)":
+            case "Loans & Advances (Asset)":
+            case "Stock-in-Hand":
+            case "Sundry Debtors":
+                setSubUnder("(Current Assets)");
+                break;
+            case "Duties & Taxes":
+            case "Provisions":
+            case "Sundry Creditors":
+                setSubUnder("(Current Liabilities)")
+                break;
+            case "Reserves & Surplus":
+            case "Retained Earnings":
+                setSubUnder("(Capital Account)");
+                break;
+            default:
+                setSubUnder("");
+                break;
+        }
+    };
 
     const inputRef = useRef(null);
 
@@ -55,6 +96,7 @@ const NewLedgerCreate = () => {
         const newValue = e.target.value;
         const capitalizedValue = newValue.charAt(0).toUpperCase() + newValue.slice(1);
         setLedgerName(capitalizedValue);
+        setMailingName(capitalizedValue);
     };
 
 
@@ -83,7 +125,7 @@ const NewLedgerCreate = () => {
 
 
             if(validateForm()){
-            const ledger = {ledgerName, tallySerialNo, aliasName, underGroup, addressOne, addressTwo, addressThree, addressFour, addressFive, stateName, countryName, pinCode, provideBankDetails, panOrItNumber, registrationType, gstOrUin, setOrAlterGstDetails}
+            const ledger = {ledgerName, tallySerialNo, aliasName, underGroup, mailingName, addressOne, addressTwo, addressThree, addressFour, addressFive, stateName, countryName, pinCode, provideBankDetails, panOrItNumber, registrationType, gstOrUin, setOrAlterGstDetails, openingBalance}
 
             console.log(ledger);
 
@@ -96,7 +138,7 @@ const NewLedgerCreate = () => {
         }
 
         
-    }
+    };
 
     const [errors, setErrors] = useState({
         ledgerName: '',
@@ -110,7 +152,7 @@ const NewLedgerCreate = () => {
         if(e.key === 'Tab' && !validateForm()){
             e.preventDefault();
         }
-    }
+    };
 
 
   return (
@@ -161,41 +203,232 @@ const NewLedgerCreate = () => {
                         </div>
 
                         <div className='middle-box flex'>
-                            <div className='input-ldgr h-[70vh] border w-1/2 text-sm'>
-                                <label htmlFor="underGroup" >Under</label>
-                                : <select name="underGroup" id="underGroup" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={underGroup} onChange={(e) => setUnderGroup(e.target.value)}>
-                                    <option value="Bank Accounts">Bank Accounts</option>
-                                    <option value="Bank OCC A/c">Bank OCC A/c</option>
-                                    <option value="Bank OD A/c">Bank OD A/c</option>
-                                    <option value="Branch / Divisions">Branch / Divisions</option>
-                                    <option value="Capital Account">Capital Account</option>
-                                    <option value="Cash-in-Hand">Cash-in-Hand</option>
-                                    <option value="Current Assets">Current Assets</option>
-                                    <option value="Current Liabilities">Current Liabilities</option>
-                                    <option value="Deposits (Asset)">Deposits (Asset)</option>
-                                    <option value="Direct Expenses">Direct Expenses</option>
-                                    <option value="Direct Incomes">Direct Incomes</option>
-                                    <option value="Duties & Taxes">Duties & Taxes</option>
-                                    <option value="Fixed Assets">Fixed Assets</option>
-                                    <option value="Indirect Expenses">Indirect Expenses</option>
-                                    <option value="Indirect Incomes">Indirect Incomes</option>
-                                    <option value="Investments">Investments</option>
-                                    <option value="Loans & Advances (Asset)">Loans & Advances (Asset)</option>
-                                    <option value="Loans (Liability)">Loans (Liability)</option>
-                                    <option value="Misc. Expenses (ASSET)">Misc. Expenses (ASSET)</option>
-                                    <option value="Provisions">Provisions</option>
-                                    <option value="Purchase Accounts">Purchase Accounts</option>
-                                    <option value="Reserves & Surplus">Reserves & Surplus</option>
-                                    <option value="Retained Earnings">Retained Earnings</option>
-                                    <option value="Sales Accounts">Sales Accounts</option>
-                                    <option value="Secured Loans">Secured Loans</option>
-                                    <option value="Stock-in-Hand">Stock-in-Hand</option>
-                                    <option value="Sundry Creditors">Sundry Creditors</option>
-                                    <option value="Sundry Debtors">Sundry Debtors</option>
-                                    <option value="Suspense A/c">Suspense A/c</option>
-                                    <option value="Unsecured Loans">Unsecured Loans</option>
-                                </select>
+                            <div className='input-ldgr  border w-1/2 text-sm'>
+
+                                <div className='ml-2'>
+
+                                    <label htmlFor="underGroup" >Under</label>
+                                    : <select name="underGroup" id="underGroup" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={underGroup} onChange={ handleUnderGroupChange}>
+                                        <option value="Bank Accounts">Bank Accounts</option>
+                                        <option value="Bank OCC A/c">Bank OCC A/c</option>
+                                        <option value="Bank OD A/c">Bank OD A/c</option>
+                                        <option value="Branch / Divisions">Branch / Divisions</option>
+                                        <option value="Capital Account">Capital Account</option>
+                                        <option value="Cash-in-Hand">Cash-in-Hand</option>
+                                        <option value="Current Assets">Current Assets</option>
+                                        <option value="Current Liabilities">Current Liabilities</option>
+                                        <option value="Deposits (Asset)">Deposits (Asset)</option>
+                                        <option value="Direct Expenses">Direct Expenses</option>
+                                        <option value="Direct Incomes">Direct Incomes</option>
+                                        <option value="Duties & Taxes">Duties & Taxes</option>
+                                        <option value="Fixed Assets">Fixed Assets</option>
+                                        <option value="Indirect Expenses">Indirect Expenses</option>
+                                        <option value="Indirect Incomes">Indirect Incomes</option>
+                                        <option value="Investments">Investments</option>
+                                        <option value="Loans & Advances (Asset)">Loans & Advances (Asset)</option>
+                                        <option value="Loans (Liability)">Loans (Liability)</option>
+                                        <option value="Misc. Expenses (ASSET)">Misc. Expenses (ASSET)</option>
+                                        <option value="Provisions">Provisions</option>
+                                        <option value="Purchase Accounts">Purchase Accounts</option>
+                                        <option value="Reserves & Surplus">Reserves & Surplus</option>
+                                        <option value="Retained Earnings">Retained Earnings</option>
+                                        <option value="Sales Accounts">Sales Accounts</option>
+                                        <option value="Secured Loans">Secured Loans</option>
+                                        <option value="Stock-in-Hand">Stock-in-Hand</option>
+                                        <option value="Sundry Creditors">Sundry Creditors</option>
+                                        <option value="Sundry Debtors">Sundry Debtors</option>
+                                        <option value="Suspense A/c">Suspense A/c</option>
+                                        <option value="Unsecured Loans">Unsecured Loans</option>
+                                        </select>
+
+                                       
+
+                                </div>
+
+                                <div>
+                                    <label htmlFor="subUnder"></label>
+                                     <input type="text" id='subUnder' name='subUnder' value={subUnder}  readOnly className='ml-16' />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Type of Ledger</label>
+                                    : <select name="" id="">
+                                        <option value="Not Applicable">&diams;Not Applicable</option>
+                                        <option value="Discount">Discount</option>
+                                        <option value="Invoice Rounding">Invoice Rounding</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="costsCentresAreAplicable">Costs centres are applicable</label>
+                                    : <select name="costsCentresAreAplicable" id="costsCentresAreAplicable">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Set OD limit</label>
+                                    : <input type="text" id='' name='' />
+                                </div>
+
+                                <h2 className='underline font-semibold'>Statuory Details</h2>
+
+                                <div>
+                                    <label htmlFor="">Include in Assesable Value calculation</label>
+                                    : <select name="" id="">
+                                        <option value="Not Applicable">&diams;Not Applicable</option>
+                                        <option value="GST">GST</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">GST Applicability</label>
+                                    : <select name="" id="">
+                                        <option value="Applicable">&diams;Applicable</option>
+                                        <option value="Not Applicable">&diams;Not Applicable</option>
+                                    </select>
+                                </div>
+
+                                <h2 className='underline font-semibold'>HSN/SAC & Related Details</h2>
+
+                                <div>
+                                    <label htmlFor="">HSN/SAC Details</label>
+                                    : <select name="" id="">
+                                        <option value="asPerCompanyOrGroup">As per Company/Group</option>
+                                        <option value="specifyDetailsHere">Specify Details Here</option>
+                                        <option value="useGstClassification">Use GST Classification</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Source of Details</label>
+                                    : <input type="text" id='' name='' value="Not Available" />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">HSN/SAC Describtion</label>
+                                    : <input type="text" />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Classification</label>
+                                    : <input type="text" />
+                                </div>
+
+                                <h2 className='underline font-semibold'>GST Rate & Related Details</h2>
+
+                                <div>
+                                    <label htmlFor="">GST Rate Details</label>
+                                    : <select name="" id="">
+                                        <option value="">As per Company/Group</option>
+                                        <option value="">Specify Details Here</option>
+                                        <option value="">Specify Slab-Based Rates</option>
+                                        <option value="">Use GST Classification</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Taxability Type</label>
+                                    : <select name="" id="">
+                                        <option value="">Exempt</option>
+                                        <option value="">Nil Rated</option>
+                                        <option value="">Non-GST</option>
+                                        <option value="">Taxable</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Nature of Transaction</label>
+                                    : <select name="" id="">
+                                        <option value="">&diams;System Inferred</option>
+                                        <option value="">Local Purchase - Taxable</option>
+                                        <option value="">Interstate Purchase - Taxable</option>
+                                        <option value="">Local Purchase Deemed Exports - Taxable</option>
+                                        <option value="">Interstate Purchase Deemed Exports - Taxable</option>
+                                        <option value="">Imports - Taxable</option>
+                                        <option value="">Purchase from SEZ - Taxable</option>
+                                        <option value="">Purchase from SEZ (Without Bill of Entry) - Taxable</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">IGST Rate</label>
+                                    : <input type="text" />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">CGST Rate</label>
+                                    : <input type="text" />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">SGST/UTGST Rate</label>
+                                    : <input type="text" />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Type of Supply</label>
+                                    : <select name="" id="">
+                                        <option value="">Capital Goods</option>
+                                        <option value="">Goods</option>
+                                        <option value="">Services</option>
+                                    </select>
+                                </div>
+                                
+                                <h2 className='underline font-semibold'>Bank Account Details</h2>
+
+                                <div>
+                                    <label htmlFor="">A/c Holder's Name</label>
+                                    : <input type="text" id='' name='' />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">A/c No.</label>
+                                    : <input type="number" id='' name='' />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">IFSC Code</label>
+                                    : <input type="text" id='' name='' />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">SWIFT Code</label>
+                                    : <input type="text" id='' name='' />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Bank Name</label>
+                                    : <input type="text" id='' name='' />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Branch</label>
+                                    : <input type="text" id='' name='' />
+                                </div>
+
+                                <h2 className='underline font-semibold'>Bank Configuration</h2>
+
+                                <div>
+                                    <label htmlFor="">Set/Alter range for Cheque Books</label>
+                                    : <select name="" id="">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Enable Cheque Printing</label>
+                                    : <select name="" id="">
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                
                             </div>
+
+                            
 
                             <div className='h-[70vh] w-1/2 border p-2 text-sm'>
                                 <h2 className='underline font-semibold'>Mailing Details</h2>
@@ -371,7 +604,7 @@ const NewLedgerCreate = () => {
                         </div>
 
                         <div className='open-balance flex justify-center p-[2px]'>
-                            <h3 className='text-sm'>Opening Balance <span className='pl-5'>( on 1-Apr-24):</span><input type="text" id='openingBalance' name='openingBalance' value={openingBalance} onChange={(e) => setOpeningBalance(e.target.value)} className='h-5 w-[80px] outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' /></h3>
+                            <h3 className='text-sm'>Opening Balance <span className='pl-5'>( on 1-Apr-24):</span> Rs.<input type="text" id='openingBalance' name='openingBalance' value={openingBalance} onChange={(e) => setOpeningBalance(e.target.value)} className='h-5 w-[80px] outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' /></h3>
                         </div>
 
                         <div className='flex justify-center'>

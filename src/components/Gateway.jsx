@@ -17,12 +17,12 @@ const Gateway = () => {
                     <button className='p-2 bg-lime-700 w-72 rounded-md mb-2'>Add LedgerDetails</button>
                 </Link>
 
-                <Link to="/updateselect">
-                    <button className='p-2 bg-cyan-600 w-72 rounded-md mb-2'>View Ledger Details</button>
+                <Link>
+                    <button className='p-2 bg-cyan-600 w-72 rounded-md mb-2'>Add Voucher Details</button>
                 </Link>
 
                 <Link>
-                    <button className='p-2 bg-violet-600 w-72 rounded-md mb-2'>Delete Ledger Details</button>
+                    <button className='p-2 bg-violet-600 w-72 rounded-md mb-2'>Add Group Details</button>
                 </Link>
                 
                 
