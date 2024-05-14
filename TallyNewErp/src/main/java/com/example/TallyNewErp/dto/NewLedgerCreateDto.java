@@ -20,6 +20,8 @@ public class NewLedgerCreateDto {
 
     private String underGroup;
 
+    private String mailingName;
+
     private String addressOne;
 
     private String addressTwo;

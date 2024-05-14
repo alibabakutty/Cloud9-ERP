@@ -30,6 +30,9 @@ public class NewLedgerCreate {
     @Column(name = "under_group")
     private String underGroup;
 
+    @Column(name = "mailing_name")
+    private String mailingName;
+
     @Column(name = "address_one")
     private String addressOne;
 

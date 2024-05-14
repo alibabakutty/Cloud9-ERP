@@ -54,6 +54,7 @@ public class NewLedgerCreateServiceImpl implements NewLedgerCreateService {
         newLedgerCreate.setTallySerialNo(updatedLedger.getTallySerialNo());
         newLedgerCreate.setAliasName(updatedLedger.getAliasName());
         newLedgerCreate.setUnderGroup(updatedLedger.getUnderGroup());
+        newLedgerCreate.setMailingName(updatedLedger.getMailingName());
         newLedgerCreate.setAddressOne(updatedLedger.getAddressOne());
         newLedgerCreate.setAddressTwo(updatedLedger.getAddressTwo());
         newLedgerCreate.setAddressThree(updatedLedger.getAddressThree());
