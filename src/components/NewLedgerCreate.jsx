@@ -58,74 +58,6 @@ const NewLedgerCreate = () => {
 
     const navigator = useNavigate();
 
-    useEffect(() => {
-        hideElements();
-        
-    }, []);
-
-    const handleUnderGroupChange = (e) => {
-        const newValue = e.target.value;
-        setUnderGroup(newValue);
-        setSubUnder("");
-        updateSubUnder(newValue); // <-- Call the function like this
-       
-        if (newValue === "Capital Account") {
-            hideElements();
-        } else {
-            showElements();
-        }
-        
-    };
-
-
-    window.onload = function () {
-        const underGroupSelect = document.getElementById("underGroup");
-    
-        underGroupSelect.addEventListener("change", handleUnderGroupChange);
-    
-        // Initial hide/show based on the selected value
-        handleUnderGroupChange({ target: { value: underGroupSelect.value } });
-    }
-
-    
-
-    const inputRef = useRef(null);
-
-
-    const updateSubUnder = (underGroup) => {
-        switch(underGroup){
-            case "Bank Accounts":
-                setSubUnder("(Current Assets)")
-                break;
-            case "Bank OCC A/c":
-            case "Bank OD A/c":
-            case "Secured Loans":
-            case "Unsecured Loans":
-                setSubUnder("Loans(Liability)");
-                break;
-            case "Cash-in-Hand":
-            case "Deposits (Asset)":
-            case "Loans & Advances (Asset)":
-            case "Stock-in-Hand":
-            case "Sundry Debtors":
-                setSubUnder("(Current Assets)");
-                break;
-            case "Duties & Taxes":
-            case "Provisions":
-            case "Sundry Creditors":
-                setSubUnder("(Current Liabilities)")
-                break;
-            case "Reserves & Surplus":
-            case "Retained Earnings":
-                setSubUnder("(Capital Account)");
-                break;
-            default:
-                setSubUnder("");
-                break;
-        }
-    };
-
-
     function hideElements () {
         const elementsToHide = [
             "headUnder",
@@ -134,6 +66,7 @@ const NewLedgerCreate = () => {
             "headUnderThree",
             "headUnderFour",
             "typeOfLedger",
+            "costsCentresAreApplicable",
             "odLimit",
             "includeInAssesableValueCalculation",
             "gstApplicability",
@@ -156,7 +89,20 @@ const NewLedgerCreate = () => {
             "bankName",
             "branchName",
             "alterRangeForChequeBooks",
-            "enableChequePrinting"
+            "enableChequePrinting",
+            "maintainBalancesBillByBill",
+            "defaultCreditPeriod",
+            "checkForCreditDaysDuringVoucherEntry",
+            "contactPerson",
+            "contactPhoneNumber",
+            "mobileNumber",
+            "email",
+            "stateName",
+            "countryName",
+            "pinCode",
+            "registrationType",
+            "gstOrUin",
+            "setOrAlterGstDetails   "
 
 
         ];
@@ -220,6 +166,163 @@ const NewLedgerCreate = () => {
         
     }
 
+    useEffect(() => {
+        hideElements();
+        
+    }, []);
+
+    const handleUnderGroupChange = (e) => {
+        const newValue = e.target.value;
+        setUnderGroup(newValue);
+        setSubUnder("");
+        updateSubUnder(newValue); // <-- Call the function like this
+       
+        switch(newValue) {
+            case "Capital Account":
+                hideElements();
+                
+                break;
+            case "Bank Accounts":
+                hideElements();
+                break;
+            case "Bank OCC A/c":
+                hideElements();
+                break;
+            case "Bank OD A/c":
+                hideElements();
+                break;
+            case "Branch / Divisions":
+                hideElements();
+                break;
+            case "Cash-in-Hand":
+                hideElements();
+                break;
+                case "Current Assets":
+                    hideElements();
+                    break;
+                case "Current Liabilities":
+                    hideElements();
+                    break;
+                case "Deposits (Asset)":
+                    hideElements();
+                    break;
+                case "Direct Expenses":
+                    hideElements();
+                    break;
+                case "Direct Incomes":
+                    hideElements();
+                    break;
+                case "Duties & Taxes":
+                    hideElements();
+                    break;
+                case "Fixed Assets":
+                    hideElements();
+                    break;
+                case "Indirect Expenses":
+                    hideElements();
+                    break;
+                case "Indirect Incomes":
+                    hideElements();
+                    break;
+                case "Investments":
+                    hideElements();
+                    break;
+                case "Loans & Advances (Asset)":
+                    hideElements();
+                    break;
+                case "Loans (Liability)":
+                    hideElements();
+                    break;
+                case "Misc. Expenses (ASSET)":
+                    hideElements();
+                    break;
+                case "Provisions":
+                    hideElements();
+                    break;
+                case "Purchase Accounts":
+                    hideElements();
+                    break;
+                case "Reserves & Surplus":
+                    hideElements();
+                    break;
+                case "Retained Earnings":
+                    hideElements();
+                    break;
+                case "Sales Accounts":
+                    hideElements();
+                    break;
+                case "Secured Loans":
+                    hideElements();
+                    break;
+                case "Stock-in-Hand":
+                    hideElements();
+                    break;
+                case "Sundry Creditors":
+                    hideElements();
+                    break;
+                case "Sundry Debtors":
+                    hideElements();
+                    break;
+                case "Suspense A/c":
+                    hideElements();
+                    break;
+                case "Unsecured Loans":
+                    showElements();
+                    break;
+            default:
+                showElements();
+                break;
+        }
+        
+    };
+
+
+    window.onload = function () {
+        const underGroupSelect = document.getElementById("underGroup");
+    
+        underGroupSelect.addEventListener("change", handleUnderGroupChange);
+    
+        // Initial hide/show based on the selected value
+        handleUnderGroupChange({ target: { value: underGroupSelect.value } });
+    }
+
+
+    const updateSubUnder = (underGroup) => {
+        switch(underGroup){
+            case "Bank Accounts":
+                setSubUnder("(Current Assets)")
+                break;
+            case "Bank OCC A/c":
+            case "Bank OD A/c":
+            case "Secured Loans":
+            case "Unsecured Loans":
+                setSubUnder("Loans(Liability)");
+                break;
+            case "Cash-in-Hand":
+            case "Deposits (Asset)":
+            case "Loans & Advances (Asset)":
+            case "Stock-in-Hand":
+            case "Sundry Debtors":
+                setSubUnder("(Current Assets)");
+                break;
+            case "Duties & Taxes":
+            case "Provisions":
+            case "Sundry Creditors":
+                setSubUnder("(Current Liabilities)")
+                break;
+            case "Reserves & Surplus":
+            case "Retained Earnings":
+                setSubUnder("(Capital Account)");
+                break;
+            default:
+                setSubUnder("");
+                break;
+        }
+    };
+
+
+    
+
 
     const handleMailingNameChange = (e) => {
         const newValue = e.target.value;
@@ -272,11 +375,11 @@ const NewLedgerCreate = () => {
 
     const [errors, setErrors] = useState({
         ledgerName: '',
-        tallySerialNo: '',
+        tallySerialNo: ''
         
     })
 
-
+    const inputRef = useRef(null);
     
     const hanldeTabPress = (e) => {
         if(e.key === 'Tab' && !validateForm()){
@@ -287,12 +390,15 @@ const NewLedgerCreate = () => {
 
     
 
-    // const handleKeyPress = (e, nextInputRef) => {
-    //     if(e.key === 'Enter'){
-    //         e.preventDefault();
-    //         nextInputRef.current.focus();
-    //     }
-    // };
+    const handleKeyPress = (e, nextInputRef) => {
+        console.log(nextInputRef.current); // Check the type of element
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            if (nextInputRef.current && typeof nextInputRef.current.focus === 'function') {
+                nextInputRef.current.focus();
+            }
+        }
+    };
 
 
 
@@ -331,7 +437,7 @@ const NewLedgerCreate = () => {
                                     
                                     <div className='input-ldgr flex items-start mr-4 mt-1 ' style={{ width: '50%' }}>
                                         <label htmlFor="ledgerName" className='text-sm mr-12'>Name</label>
-                                        : <input type="text" id='ledgerName' name='ledgerName' value={ledgerName} onChange={(e) => {handleLedgerNameChange(e); setLedgerName(e.target.value); setErrors({...errors, ledgerName: ''})}} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-[500px] focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off' ref={inputRef} onFocus={() => inputRef.current = 'ledgerName'} onKeyDown={hanldeTabPress} /> <br />
+                                        : <input type="text" id='ledgerName' name='ledgerName' value={ledgerName} onChange={(e) => {handleLedgerNameChange(e); setLedgerName(e.target.value); setErrors({...errors, ledgerName: ''})}} className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-[500px] focus:border focus:border-blue-500 focus:outline-none ' autoComplete='off' ref={inputRef} onFocus={() => inputRef.current = 'ledgerName'} onKeyDown={(e) => { if(e.key === 'Tab'){hanldeTabPress(e);}else if(e.key === 'Enter'){e.preventDefault(); handleKeyPress(e, inputRef);} }} /> <br />
                                         
                                     </div>
 
@@ -362,7 +468,7 @@ const NewLedgerCreate = () => {
 
                                 <div className='ml-2'>
 
-                                    <label htmlFor="underGroup" className='mr-[202px]' >Under</label>
+                                    <label htmlFor="underGroup" className='mr-[224px]' >Under</label>
                                     : <select name="underGroup" id="underGroup" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={underGroup} onChange={ handleUnderGroupChange}>
                                         <option value="Bank Accounts">Bank Accounts</option>
                                         <option value="Bank OCC A/c">Bank OCC A/c</option>
@@ -402,15 +508,36 @@ const NewLedgerCreate = () => {
 
                                 <div>
                                     <label htmlFor="subUnder"></label>
-                                     <input type="text" id='subUnder' name='subUnder' value={subUnder}  readOnly className='ml-64 h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
+                                     <input type="text" id='subUnder' name='subUnder' value={subUnder}  readOnly className='ml-[278px] h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='typeOfLedger' >
-                                    <label htmlFor="typeOfLedger" className='mr-[157px]'>Type of Ledger</label>
+                                    <label htmlFor="typeOfLedger" className='mr-[171px]'>Type of Ledger</label>
                                     : <select name="typeOfLedger" id="typeOfLedger" value={typeOfLedger} onChange={(e) => setTypeOfLedger(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="Not Applicable">&diams;Not Applicable</option>
                                         <option value="Discount">Discount</option>
                                         <option value="Invoice Rounding">Invoice Rounding</option>
+                                    </select>
+                                </div>
+
+                                <div className='input-ldgr flex ml-2' id='maintainBalancesBillByBill'>
+                                    <label htmlFor="maintainBalancesBillByBill" className='mr-[83px]'>Maintain balances bill-by-bill</label>
+                                    : <select name="maintainBalancesBillByBill" id="maintainBalancesBillByBill"  className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div className='input-ldgr flex ml-2' id='defaultCreditPeriod'>
+                                    <label htmlFor="defaultCreditPeriod" className='mr-[135px]'>Default credit period</label>
+                                    : <input type="text" id='defaultCreditPeriod' name='defaultCreditPeriod'  className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
+                                </div>
+
+                                <div className='input-ldgr flex ml-2' id='checkForCreditDaysDuringVoucherEntry'>
+                                    <label htmlFor="checkForCreditDaysDuringVoucherEntry" className='mr-[3px]'>Check for credit days during voucher entry</label>
+                                    : <select name="checkForCreditDaysDuringVoucherEntry" id="checkForCreditDaysDuringVoucherEntry"  className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
                                     </select>
                                 </div>
 
@@ -423,7 +550,7 @@ const NewLedgerCreate = () => {
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='odLimit'>
-                                    <label htmlFor="odLimit" className='mr-[174px]'>Set OD limit</label>
+                                    <label htmlFor="odLimit" className='mr-[189px]'>Set OD limit</label>
                                     : <input type="text" id='odLimit' name='odLimit' value={odLimit} onChange={(e) => setOdLimit(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
@@ -434,7 +561,7 @@ const NewLedgerCreate = () => {
                                 
 
                                 <div className='input-ldgr flex ml-2' id='includeInAssesableValueCalculation'>
-                                    <label htmlFor="includeInAssesableValueCalculation" className='mr-[18px]'>Include in Assesable Value calculation</label>
+                                    <label htmlFor="includeInAssesableValueCalculation" className='mr-[32px]'>Include in Assesable Value calculation</label>
                                     : <select name="includeInAssesableValueCalculation" id="includeInAssesableValueCalculation" value={includeInAssesableValueCalculation} onChange={(e) => setIncludeInAssesableValueCalculation(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="Not Applicable">&diams;Not Applicable</option>
                                         <option value="GST">GST</option>
@@ -442,7 +569,7 @@ const NewLedgerCreate = () => {
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='gstApplicability'>
-                                    <label htmlFor="gstApplicability" className='mr-[145px]'>GST Applicability</label>
+                                    <label htmlFor="gstApplicability" className='mr-[161px]'>GST Applicability</label>
                                     : <select name="gstApplicability" id="gstApplicability" value={gstApplicability} onChange={(e) => setGstApplicability(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="Applicable">&diams;Applicable</option>
                                         <option value="Not Applicable">&diams;Not Applicable</option>
@@ -455,7 +582,7 @@ const NewLedgerCreate = () => {
 
 
                                 <div className='input-ldgr flex ml-2' id='hsnOrSacAndRelatedDetails'>
-                                    <label htmlFor="hsnOrSacAndRelatedDetails" className='mr-[146px]'>HSN/SAC Details</label>
+                                    <label htmlFor="hsnOrSacAndRelatedDetails" className='mr-[160px]'>HSN/SAC Details</label>
                                     : <select name="hsnOrSacAndRelatedDetails" id="hsnOrSacAndRelatedDetails" value={hsnOrSacAndRelatedDetails} onChange={(e) => setHsnOrSacAndRelatedDetails(e.target.value)} className='w-[185px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="asPerCompanyOrGroup">As per Company/Group</option>
                                         <option value="specifyDetailsHere">Specify Details Here</option>
@@ -464,17 +591,17 @@ const NewLedgerCreate = () => {
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='sourceOfDetails'>
-                                    <label htmlFor="sourceOfDetails" className='mr-[146px]'>Source of Details</label>
+                                    <label htmlFor="sourceOfDetails" className='mr-[160px]'>Source of Details</label>
                                     : <input type="text" id='sourceOfDetails' name='sourceOfDetails' value={sourceOfDetails} onChange={(e) => setSourceOfDetails(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='hsnOrSacDescribtion'>
-                                    <label htmlFor="hsnOrSacDescribtion" className='mr-[118px]'>HSN/SAC Describtion</label>
+                                    <label htmlFor="hsnOrSacDescribtion" className='mr-[132px]'>HSN/SAC Describtion</label>
                                     : <input type="text" id='hsnOrSacDescribtion' name='hsnOrSacDescribtion' value={hsnOrSacDescribtion} onChange={(e) => setHsnOrSacDescribtion(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='classification'>
-                                    <label htmlFor="classification" className='mr-[170px]'>Classification</label>
+                                    <label htmlFor="classification" className='mr-[184px]'>Classification</label>
                                     : <input type="text" id='classification' name='classification' value={classification} onChange={(e) => setClassification(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
@@ -485,7 +612,7 @@ const NewLedgerCreate = () => {
                                 
 
                                 <div className='input-ldgr flex ml-2' id='gstRateDetails'>
-                                    <label htmlFor="gstRateDetails" className='mr-[148px]'>GST Rate Details</label>
+                                    <label htmlFor="gstRateDetails" className='mr-[162px]'>GST Rate Details</label>
                                     : <select name="gstRateDetails" id="gstRateDetails" value={gstRateDetails} onChange={(e) => setGstRateDetails(e.target.value)} className='w-[185px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="asPerCompanyOrGroup">As per Company/Group</option>
                                         <option value="specifyDetailsHere">Specify Details Here</option>
@@ -495,7 +622,7 @@ const NewLedgerCreate = () => {
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='taxabilityType'>
-                                    <label htmlFor="taxabilityType" className='mr-[160px]'>Taxability Type</label>
+                                    <label htmlFor="taxabilityType" className='mr-[174px]'>Taxability Type</label>
                                     : <select name="taxabilityType" id="taxabilityType" value={taxabilityType} onChange={(e) => setTaxabilityType(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="exempt">Exempt</option>
                                         <option value="nilRated">Nil Rated</option>
@@ -505,36 +632,36 @@ const NewLedgerCreate = () => {
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='natureOfTransaction'>
-                                    <label htmlFor="natureOfTransaction" className='mr-[114.5px]'>Nature of Transaction</label>
-                                    : <select name="natureOfTransaction" id="natureOfTransaction" value={natureOfTransaction} onChange={(e) => setNatureOfTransaction(e.target.value)} className='w-[355px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
+                                    <label htmlFor="natureOfTransaction" className='mr-[130px]'>Nature of Transaction</label>
+                                    : <select name="natureOfTransaction" id="natureOfTransaction" value={natureOfTransaction} onChange={(e) => setNatureOfTransaction(e.target.value)} className='w-[340px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="systemInferred">&diams;System Inferred</option>
-                                        <option value="localPurchaseTaxable">Local Purchase - Taxable</option>
-                                        <option value="interstatePurchaseTaxable">Interstate Purchase - Taxable</option>
-                                        <option value="localPurchaseDeemedExportsTaxable">Local Purchase Deemed Exports - Taxable</option>
-                                        <option value="interstatePurchaseDeemedExportsTaxable">Interstate Purchase Deemed Exports - Taxable</option>
-                                        <option value="importsTaxable">Imports - Taxable</option>
-                                        <option value="purchaseFromSezTaxable">Purchase from SEZ - Taxable</option>
-                                        <option value="purchaseFromSezWithoutBillOfEntryTaxable">Purchase from SEZ (Without Bill of Entry) - Taxable</option>
+                                        <option value="localPurchaseTaxable">Local Purchase-Taxable</option>
+                                        <option value="interstatePurchaseTaxable">Interstate Purchase-Taxable</option>
+                                        <option value="localPurchaseDeemedExportsTaxable">Local Purchase Deemed Exports-Taxable</option>
+                                        <option value="interstatePurchaseDeemedExportsTaxable">Interstate Purchase Deemed Exports-Taxable</option>
+                                        <option value="importsTaxable">Imports-Taxable</option>
+                                        <option value="purchaseFromSezTaxable">Purchase from SEZ-Taxable</option>
+                                        <option value="purchaseFromSezWithoutBillOfEntryTaxable">Purchase from SEZ (Without Bill of Entry)-Taxable</option>
                                     </select>
                                 </div>
  
                                 <div className='input-ldgr flex ml-2' id='igstRate'>
-                                    <label htmlFor="igstRate" className='mr-[190px]'>IGST Rate</label>
+                                    <label htmlFor="igstRate" className='mr-[203px]'>IGST Rate</label>
                                     : <input type="text" id='igstRate' name='igstRate' value={igstRate} onChange={(e) => setIgstRate(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='cgstRate'>
-                                    <label htmlFor="cgstRate" className='mr-[185px]'>CGST Rate</label>
+                                    <label htmlFor="cgstRate" className='mr-[198px]'>CGST Rate</label>
                                     : <input type="text" id='cgstRate' name='cgstRate' value={cgstRate} onChange={(e) => setCgstRate(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='utgstRate'>
-                                    <label htmlFor="utgstRate" className='mr-[140px]'>SGST/UTGST Rate</label>
+                                    <label htmlFor="utgstRate" className='mr-[153px]'>SGST/UTGST Rate</label>
                                     : <input type="text" id='utgstRate' name='utgstRate' value={utgstRate} onChange={(e) => setUtgstRate(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='typeOfSupply'>
-                                    <label htmlFor="typeOfSupply" className='mr-[159px]'>Type of Supply</label>
+                                    <label htmlFor="typeOfSupply" className='mr-[171px]'>Type of Supply</label>
                                     : <select name="typeOfSupply" id="typeOfSupply" value={typeOfSupply} onChange={(e) => setTypeOfSupply(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="capitalGoods">Capital Goods</option>
                                         <option value="goods">Goods</option>
@@ -549,32 +676,32 @@ const NewLedgerCreate = () => {
                                 
 
                                 <div className='input-ldgr flex ml-2' id='accountHoldersName'>
-                                    <label htmlFor="accountHoldersName" className='mr-[134px]'>A/c Holder's Name</label>
+                                    <label htmlFor="accountHoldersName" className='mr-[145px]'>A/c Holder's Name</label>
                                     : <input type="text" id='accountHoldersName' name='accountHoldersName' value={accountHoldersName} onChange={(e) => setAccountHoldersName(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='accountNumber'>
-                                    <label htmlFor="accountNumber" className='mr-[204px]'>A/c No.</label>
+                                    <label htmlFor="accountNumber" className='mr-[215px]'>A/c No.</label>
                                     : <input type="number" id='accountNumber' name='accountNumber' value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='ifscCode'>
-                                    <label htmlFor="ifscCode" className='mr-[188px]'>IFSC Code</label>
+                                    <label htmlFor="ifscCode" className='mr-[199px]'>IFSC Code</label>
                                     : <input type="text" id='ifscCode' name='ifscCode' value={ifscCode} onChange={(e) => setIfscCode(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='swiftCode'>
-                                    <label htmlFor="swiftCode" className='mr-[176px]'>SWIFT Code</label>
+                                    <label htmlFor="swiftCode" className='mr-[187px]'>SWIFT Code</label>
                                     : <input type="text" id='swiftCode' name='swiftCode' value={swiftCode} onChange={(e) => setSwiftCode(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='bankName'>
-                                    <label htmlFor="bankName" className='mr-[180px]'>Bank Name</label>
+                                    <label htmlFor="bankName" className='mr-[191px]'>Bank Name</label>
                                     : <input type="text" id='bankName' name='bankName' value={bankName} onChange={(e) => setBankName(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
                                 <div className='input-ldgr flex ml-2' id='branchName'> 
-                                    <label htmlFor="branchName" className='mr-[209px]'>Branch</label>
+                                    <label htmlFor="branchName" className='mr-[220px]'>Branch</label>
                                     : <input type="text" id='branchName' name='branchName' value={branchName} onChange={(e) => setBranchName(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
                                 </div>
 
@@ -585,7 +712,7 @@ const NewLedgerCreate = () => {
                                 
 
                                 <div className='input-ldgr flex ml-2' id='alterRangeForChequeBooks'>
-                                    <label htmlFor="alterRangeForChequeBooks" className='mr-[44px]'>Set/Alter range for Cheque Books</label>
+                                    <label htmlFor="alterRangeForChequeBooks" className='mr-[55px]'>Set/Alter range for Cheque Books</label>
                                     : <select name="alterRangeForChequeBooks" id="alterRangeForChequeBooks" value={alterRangeForChequeBooks} onChange={(e) => setAlterRangeForChequeBooks(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
@@ -593,12 +720,34 @@ const NewLedgerCreate = () => {
                                 </div>
 
                                 <div className=' input-ldgr flex ml-2' id='enableChequePrinting'>
-                                    <label htmlFor="enableChequePrinting" className='mr-[106px]'>Enable Cheque Printing</label>
+                                    <label htmlFor="enableChequePrinting" className='mr-[117px]'>Enable Cheque Printing</label>
                                     : <select name="enableChequePrinting" id="enableChequePrinting" value={enableChequePrinting} onChange={(e) => setEnableChequePrinting(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="Yes">Yes</option>
                                         <option value="No">No</option>
                                     </select>
                                 </div>
+
+                                <div className='input-ldgr flex ml-2' id='contactPerson'>
+                                    <label htmlFor="contactPerson" className='text-blue-800 font-semibold mr-[165px]'>Contact Person</label>
+                                    : <input type="text" id='contactPerson' name='contactPerson' className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
+                                </div>
+
+                                <div className='input-ldgr flex ml-2' id='contactPhoneNumber'>
+                                    <label htmlFor="contactPhoneNumber" className='text-blue-800 font-semibold mr-[145px]'>Contact Phone No</label>
+                                    : <input type="text" id='contactPhoneNumber' name='contactPhoneNumber' className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
+                                </div>
+
+                                <div className='input-ldgr flex ml-2' id='mobileNumber'>
+                                    <label htmlFor="mobileNumber" className='text-blue-800 font-semibold mr-[193px]'>Mobile No</label>
+                                    : <input type="text" id='mobileNumber' name='mobileNumber' className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
+                                </div>
+
+                                <div className='input-ldgr flex ml-2' id='email'>
+                                    <label htmlFor="email" className='text-blue-800 font-semibold mr-[226px]'>Email</label>
+                                    : <input type="text" id='email' name='email' className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' />
+                                </div>
+
+                                
                                 
                             </div>
 
@@ -607,12 +756,12 @@ const NewLedgerCreate = () => {
                             <div className='h-[70vh] w-1/2 border text-sm'>
                                 <h2 className='underline font-semibold p-1'>Mailing Details</h2>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='mailingName'>
                                     <label htmlFor="mailingName" className='mr-[152px]'>Name</label>
                                     : <input type="text" id='mailingName' name='mailingName' value={mailingName} onChange={(e) => {handleMailingNameChange(e); setMailingName(e.target.value)}} className=' w-[400px] h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='address'>
                                     <label htmlFor="address" className='mr-[140px]'>Address</label>
                                     : <input type="text" id='addressOne' name='addressOne' value={addressOne} onChange={(e) => {setAddressOne(e.target.value)}} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
@@ -637,7 +786,7 @@ const NewLedgerCreate = () => {
                                     <input type="text" id='addressFive' name='addressFive' value={addressFive} onChange={(e) => {setAddressFive(e.target.value)}} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='stateName'>
                                     <label htmlFor="stateName" className='mr-[158px]'>State</label>
                                     : <select name="stateName" id="stateName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={stateName} onChange={(e) => setStateName(e.target.value)}>
                                         <option value="New State">New State</option>
@@ -681,7 +830,7 @@ const NewLedgerCreate = () => {
                                     </select>
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='countryName'>
                                     <label htmlFor="countryName" className='mr-[140px]'>Country</label>
                                     : <select name="countryName" id="countryName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={countryName} onChange={(e) => setCountryName(e.target.value)}>
                                         <option value="New Country">New Country</option>
@@ -721,16 +870,16 @@ const NewLedgerCreate = () => {
                                     </select>
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='pinCode'>
                                     <label htmlFor="pinCode" className='mr-[140px]'>Pincode</label>
                                     : <input type="number" id='pinCode' name='pinCode' value={pinCode} onChange={(e) => setPinCode(e.target.value)} className='h-5 outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
-                                <div className='input-ldgr p-1'>
-                                    <h2 className='underline font-semibold mt-5'>Banking Details</h2>
+                                <div className='input-ldgr p-1' id='headUnderFive'>
+                                    <h2 className='headUnderFive underline font-semibold mt-5'>Banking Details</h2>
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='provideBankDetails'>
                                     <label htmlFor="provideBankDetails" className='mr-[67px]'>Provide bank details</label>
                                     : <select name="provideBankDetails" id="provideBankDetails" value={provideBankDetails} onChange={(e) => setProvideBankDetails(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
                                         <option value="Yes">Yes</option>
@@ -738,16 +887,16 @@ const NewLedgerCreate = () => {
                                     </select>
                                 </div>
 
-                                <div className='input-ldgr p-1'>
-                                    <h2 className='underline font-semibold mt-5'>Tax Registration Details</h2>
+                                <div className='input-ldgr p-1' id='headUnderSix'>
+                                    <h2 className='headUnderSix underline font-semibold mt-5'>Tax Registration Details</h2>
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='panOrItNumber'>
                                     <label htmlFor="panOrItNumber" className='mr-[123px]'>PAN/IT No.</label>
                                     : <input type="text" id='panOrItNumber' name='panOrItNumber' value={panOrItNumber} onChange={(e) => setPanOrItNumber(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='registrationType'>
                                     <label htmlFor="registrationType" className='mr-[85px]'>Registration Type</label>
                                     : <select name="registrationType" id="registrationType" value={registrationType} onChange={(e) => setRegistrationType(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
                                         <option value="Unknown">&diams;Unknown</option>
@@ -757,12 +906,12 @@ const NewLedgerCreate = () => {
                                     </select>
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='gstOrUin'>
                                     <label htmlFor="gstOrUin" className='mr-[124px]'>GSTIN/UIN</label>
                                     : <input type="text" id='gstOrUin' name='gstOrUin' value={gstOrUin} onChange={(e) => setGstOrUin(e.target.value)} className='h-5 capitalize outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off' />
                                 </div>
 
-                                <div className='input-ldgr ml-2'>
+                                <div className='input-ldgr ml-2' id='setOrAlterGstDetails'>
                                     <label htmlFor="setOrAlterGstDetails">Set/Alter additional GST details</label>
                                     : <select name="setOrAlterGstDetails" id="setOrAlterGstDetails" value={setOrAlterGstDetails} onChange={(e) => setSetOrAlterGstDetails(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500'>
                                         <option value="Yes">Yes</option>
