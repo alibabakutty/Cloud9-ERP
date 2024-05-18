@@ -23,6 +23,8 @@ function App() {
           <Route path="/view" element ={<ListOfLedgerDetails />} />
           {/* http://localhost:3000/added */}
           <Route path="/added" element ={<LedgerAddedCheck />} />
+         
+          
         </Routes>
       </BrowserRouter>
       
