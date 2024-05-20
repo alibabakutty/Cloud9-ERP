@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface NewLedgerCreateDAO extends JpaRepository<NewLedgerCreate,String> {
+    boolean existsByLedgerName(String ledgerName);
 }
