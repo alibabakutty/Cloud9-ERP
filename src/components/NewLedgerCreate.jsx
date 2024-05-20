@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoClose } from "react-icons/io5";
 import { createNewLedger } from '../services/NewLedgerCreateService';
 import { useNavigate } from 'react-router-dom';
+import Bank from '../Bank';
 
 
 const NewLedgerCreate = () => {
@@ -362,7 +363,7 @@ const NewLedgerCreate = () => {
 
 
             if(validateForm()){
-            const ledger = {ledgerName, tallySerialNo, aliasName, underGroup, mailingName, addressOne, addressTwo, addressThree, addressFour, addressFive, stateName, countryName, pinCode, provideBankDetails, panOrItNumber, registrationType, gstOrUin, setOrAlterGstDetails, openingBalance}
+            const ledger = {ledgerName, tallySerialNo, aliasName, underGroup, subUnder, typeOfLedger, maintainBalancesBillByBill, defaultCreditPeriod, checkForCreditDaysDuringVoucherEntry, typeOfDutyOrTax, costsCentresAreApplicable, percentageOfCalculation, odLimit, includeInAssessableValueCalculation, gstApplicability, hsnOrSacAndRelatedDetails, sourceOfDetails, hsnOrSac, hsnOrSacDescription, classification, gstRateDetails, taxabilityType, natureOfTransaction, igstRate, cgstRate, utgstRate, typeOfSupply, accountHoldersName, accountNumber, ifscCode, swiftCode, bankName, branchName, alterRangeForChequeBooks, enableChequePrinting, alterChequePrintingConfiguration, contactPerson, contactPhoneNumber, mobileNumber, email, mailingName, addressOne, addressTwo, addressThree, addressFour, addressFive, stateName, countryName, pinCode, provideBankDetails, panOrItNumber, registrationType, gstOrUin, setOrAlterGstDetails, openingBalance};
 
             console.log(ledger);
 
@@ -724,6 +725,12 @@ const NewLedgerCreate = () => {
                                     <label htmlFor="bankName" className='mr-[191px]'>Bank Name</label>
                                     : <select name="bankName" id="bankName" value={bankName} onChange={(e) => setBankName(e.target.value)} className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 '>
                                         <option value="Not Applicable">&diams;Not Applicable</option>
+                                        {
+                                            Bank.map((ban)=>(
+                                                <option value={ban.value} key={ban.id}>{ban.label}</option>
+                                            ))
+                                        }
+                                        
                                         
                                     </select>
                                 </div>
