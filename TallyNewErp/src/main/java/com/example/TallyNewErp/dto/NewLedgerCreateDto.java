@@ -20,6 +20,80 @@ public class NewLedgerCreateDto {
 
     private String underGroup;
 
+    private  String subUnder;
+
+    private String typeOfLedger;
+
+    private String maintainBalancesBillByBill;
+
+    private String defaultCreditPeriod;
+
+    private String checkForCreditDaysDuringVoucherEntry;
+
+    private String typeOfDutyOrTax;
+
+    private  String costsCentresAreApplicable;
+
+    private  Long percentageOfCalculation;
+
+    private  String odLimit;
+
+    private String includeInAssessableValueCalculation;
+
+    private  String gstApplicability;
+
+    private String hsnOrSacAndRelatedDetails;
+
+    private String sourceOfDetails;
+
+    private String hsnOrSac;
+
+    private String hsnOrSacDescription;
+
+    private String classification;
+
+    private String gstRateDetails;
+
+    private String taxabilityType;
+
+    private String natureOfTransaction;
+
+    private Long igstRate;
+
+    private Long cgstRate;
+
+    private Long utgstRate;
+
+    private String typeOfSupply;
+
+    private String accountHoldersName;
+
+    private Long accountNumber;
+
+    private String ifscCode;
+
+    private String swiftCode;
+
+    private String bankName;
+
+    private String branchName;
+
+    private String alterRangeForChequeBooks;
+
+    private String enableChequePrinting;
+
+    private String alterChequePrintingConfiguration;
+
+    private String contactPerson;
+
+    private Long contactPhoneNumber;
+
+    private Long mobileNumber;
+
+    private String email;
+
+    private String mailingName;
+
     private String addressOne;
 
     private String addressTwo;
@@ -46,6 +120,6 @@ public class NewLedgerCreateDto {
 
     private String setOrAlterGstDetails;
 
-    private String openingBalance;
+    private Long openingBalance;
 
 }
