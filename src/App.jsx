@@ -3,6 +3,7 @@ import ListOfLedgerDetails from "./components/ListOfLedgerDetails"
 import NewLedgerCreate from "./components/NewLedgerCreate"
 import Gateway from "./components/Gateway"
 import LedgerAddedCheck from "./components/LedgerAddedCheck"
+import MirroringOptions from "./components/MirroringOptions"
 
 
 
@@ -23,6 +24,9 @@ function App() {
           <Route path="/view" element ={<ListOfLedgerDetails />} />
           {/* http://localhost:3000/added */}
           <Route path="/added" element ={<LedgerAddedCheck />} />
+
+          
+          <Route path="/mirror" element={<MirroringOptions />} />
          
           
         </Routes>

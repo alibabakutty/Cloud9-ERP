@@ -2,71 +2,270 @@ import React, { useEffect, useRef, useState } from 'react'
 import { IoClose } from "react-icons/io5";
 import { createNewLedger } from '../services/NewLedgerCreateService';
 import { Link, useNavigate } from 'react-router-dom';
-import Bank from '../Bank';
+import Bank from '../assets/Bank';
+import MirroringOptions from './MirroringOptions';
+
 
 
 const NewLedgerCreate = () => {
 
 
     // State Variables
-    const [ledgerName, setLedgerName] = useState('')
-    const [tallySerialNo, setTallySerialNo] = useState('')
-    const [aliasName, setAliasName] = useState('')
-    const [underGroup, setUnderGroup] = useState('Capital Account')
-    const [subUnder, setSubUnder] = useState('')
-    const [typeOfLedger, setTypeOfLedger] = useState('')
-    const [maintainBalancesBillByBill, setMaintainBalancesBillByBill] = useState('')
-    const [defaultCreditPeriod, setDefaultCreditPeriod] = useState('')
-    const [checkForCreditDaysDuringVoucherEntry, setCheckForCreditDaysDuringVoucherEntry] = useState('No')
-    const [typeOfDutyOrTax, setTypeOfDutyOrTax] = useState('Others')
-    const [costsCentresAreApplicable, setCostsCentresAreAplicable] = useState('No')
-    const [percentageOfCalculation, setPercentageOfCalculation] = useState('0')
-    const [odLimit, setOdLimit] = useState('')
-    const [includeInAssessableValueCalculation, setIncludeInAssessableValueCalculation] = useState('')
-    const [gstApplicability, setGstApplicability] = useState('')
-    const [hsnOrSacAndRelatedDetails, setHsnOrSacAndRelatedDetails] = useState('')
-    const [sourceOfDetails, setSourceOfDetails] = useState('Not Available')
-    const [hsnOrSac, setHasnOrSac] = useState('')
-    const [hsnOrSacDescription, setHsnOrSacDescription] = useState('')
-    const [classification, setClassification] = useState('')
-    const [gstRateDetails, setGstRateDetails] = useState('')
-    const [sourceOfDetailsGst, setSourceOfDetailsGst] = useState('Not Available')
-    const [taxabilityType, setTaxabilityType] = useState('Taxable')
-    const [natureOfTransaction, setNatureOfTransaction] = useState('')
-    const [igstRate, setIgstRate] = useState('0')
-    const [cgstRate, setCgstRate] = useState('0')
-    const [utgstRate, setUtgstRate] = useState('0')
-    const [typeOfSupply, setTypeOfSupply] = useState('Services')
-    const [accountHoldersName, setAccountHoldersName] = useState('')
-    const [accountNumber, setAccountNumber] = useState('')
-    const [ifscCode, setIfscCode] = useState('')
-    const [swiftCode, setSwiftCode] = useState('')
-    const [bankName, setBankName] = useState('Not Applicable')
-    const [branchName, setBranchName] = useState('')
-    const [alterRangeForChequeBooks, setAlterRangeForChequeBooks] = useState('No')
-    const [enableChequePrinting, setEnableChequePrinting] = useState('Yes')
-    const [alterChequePrintingConfiguration, setAlterChequePrintingConfiguration] = useState('No')
-    const [contactPerson, setContactPerson] = useState('')
-    const [contactPhoneNumber, setContactPhoneNumber] = useState('')
-    const [mobileNumber, setMobileNumber] = useState('')
-    const [email, setEmail] = useState('')
-    const [mailingName, setMailingName] = useState('')
-    const [addressOne, setAddressOne] = useState('')
-    const [addressTwo, setAddressTwo] = useState('')
-    const [addressThree, setAddressThree] = useState('')
-    const [addressFour, setAddressFour] = useState('')
-    const [addressFive, setAddressFive] = useState('')
-    const [stateName, setStateName] = useState('Not Applicable')
-    const [countryName, setCountryName] = useState('India')
-    const [pinCode, setPinCode] = useState('')
-    const [provideBankDetails, setProvideBankDetails] = useState('No')
-    const [panOrItNumber, setPanOrItNumber] = useState('')
-    const [registrationType, setRegistrationType] = useState('Regular')
-    const [gstOrUin, setGstOrUin] = useState('')
-    const [setOrAlterGstDetails, setSetOrAlterGstDetails] = useState('No')
-    const [openingBalance, setOpeningBalance] = useState('')
+    const [ledgerName, setLedgerName] = useState('');
+    const [tallySerialNo, setTallySerialNo] = useState('');
+    const [aliasName, setAliasName] = useState('');
+    const [underGroup, setUnderGroup] = useState('');
+
     
 
+    const [subUnder, setSubUnder] = useState('');
+    const [typeOfLedger, setTypeOfLedger] = useState('');
+    const [maintainBalancesBillByBill, setMaintainBalancesBillByBill] = useState('');
+    const [defaultCreditPeriod, setDefaultCreditPeriod] = useState('');
+    const [checkForCreditDaysDuringVoucherEntry, setCheckForCreditDaysDuringVoucherEntry] = useState('No');
+    const [typeOfDutyOrTax, setTypeOfDutyOrTax] = useState('Others');
+    const [costsCentresAreApplicable, setCostsCentresAreAplicable] = useState('No');
+    const [percentageOfCalculation, setPercentageOfCalculation] = useState('0');
+    const [odLimit, setOdLimit] = useState('');
+    const [includeInAssessableValueCalculation, setIncludeInAssessableValueCalculation] = useState('');
+    const [gstApplicability, setGstApplicability] = useState('');
+    const [hsnOrSacAndRelatedDetails, setHsnOrSacAndRelatedDetails] = useState('');
+    const [sourceOfDetails, setSourceOfDetails] = useState('Not Available');
+    const [hsnOrSac, setHasnOrSac] = useState('');
+    const [hsnOrSacDescription, setHsnOrSacDescription] = useState('');
+    const [classification, setClassification] = useState('');
+    const [gstRateDetails, setGstRateDetails] = useState('');
+    const [sourceOfDetailsGst, setSourceOfDetailsGst] = useState('Not Available');
+    const [taxabilityType, setTaxabilityType] = useState('Taxable');
+    const [natureOfTransaction, setNatureOfTransaction] = useState('');
+    const [igstRate, setIgstRate] = useState('0');
+    const [cgstRate, setCgstRate] = useState('0');
+    const [utgstRate, setUtgstRate] = useState('0');
+    const [typeOfSupply, setTypeOfSupply] = useState('Services');
+    const [accountHoldersName, setAccountHoldersName] = useState('');
+    const [accountNumber, setAccountNumber] = useState('');
+    const [ifscCode, setIfscCode] = useState('');
+    const [swiftCode, setSwiftCode] = useState('');
+    const [bankName, setBankName] = useState('Not Applicable');
+    const [branchName, setBranchName] = useState('');
+    const [alterRangeForChequeBooks, setAlterRangeForChequeBooks] = useState('No');
+    const [enableChequePrinting, setEnableChequePrinting] = useState('Yes');
+    const [alterChequePrintingConfiguration, setAlterChequePrintingConfiguration] = useState('No');
+    const [contactPerson, setContactPerson] = useState('');
+    const [contactPhoneNumber, setContactPhoneNumber] = useState('');
+    const [mobileNumber, setMobileNumber] = useState('');
+    const [email, setEmail] = useState('');
+    const [mailingName, setMailingName] = useState('');
+    const [addressOne, setAddressOne] = useState('');
+    const [addressTwo, setAddressTwo] = useState('');
+    const [addressThree, setAddressThree] = useState('');
+    const [addressFour, setAddressFour] = useState('');
+    const [addressFive, setAddressFive] = useState('');
+    const [stateName, setStateName] = useState('Not Applicable');
+    const [countryName, setCountryName] = useState('India');
+    const [pinCode, setPinCode] = useState('');
+    const [provideBankDetails, setProvideBankDetails] = useState('No');
+    const [panOrItNumber, setPanOrItNumber] = useState('');
+    const [registrationType, setRegistrationType] = useState('Regular');
+    const [gstOrUin, setGstOrUin] = useState('');
+    const [setOrAlterGstDetails, setSetOrAlterGstDetails] = useState('No');
+    const [openingBalance, setOpeningBalance] = useState('');
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const [showMirroringOptions, setShowMirroringOptions] = useState(false);
+
+
+    // Refs
+    const inputRef = useRef(null);
+    const tallySerialNoRef = useRef(null);
+    const aliasNameRef = useRef(null);
+    const underGroupRef = useRef(null);
+    const typeOfLedgerRef = useRef(null);
+    const maintainBalancesBillByBillRef = useRef(null);
+    const defaultCreditPeriodRef = useRef(null);
+    const checkForCreditDaysDuringVoucherEntryRef = useRef(null);
+    const typeOfDutyOrTaxRef = useRef(null);
+    const costsCentresAreApplicableRef = useRef(null);
+    const percentageOfCalculationRef = useRef(null);
+    const odLimitRef = useRef(null);
+    const includeInAssessableValueCalculationRef = useRef(null);
+    const gstApplicabilityRef = useRef(null);
+    const hsnOrSacAndRelatedDetailsRef = useRef(null);
+    const sourceOfDetailsRef = useRef(null);
+    const hsnOrSacRef = useRef(null);
+    const hsnOrSacDescriptionRef = useRef(null);
+    const classificationRef = useRef(null);
+    const gstRateDetailsRef = useRef(null);
+    const sourceOfDetailsGstRef = useRef(null);
+    const taxabilityTypeRef = useRef(null);
+    const natureOfTransactionRef = useRef(null);
+    const igstRateRef = useState(null);
+    const cgstRateRef = useState(null);
+    const utgstRateRef = useState(null);
+    const typeOfSupplyRef = useState(null);
+    const accountHoldersNameRef = useRef(null);
+    const accountNumberRef = useRef(null);
+    const ifscCodeRef = useRef(null);
+    const swiftCodeRef = useRef(null);
+    const bankNameRef = useRef(null);
+    const branchNameRef = useRef(null);
+    const alterRangeForChequeBooksRef = useRef(null);
+    const enableChequePrintingRef = useRef(null);
+    const alterChequePrintingConfigurationRef = useRef(null);
+    const contactPersonRef = useRef(null);
+    const contactPhoneNumberRef = useRef(null);
+    const mobileNumberRef = useRef(null);
+    const emailRef = useRef(null);
+    const mailingNameRef = useRef(null);
+    const addressOneRef = useRef(null);
+    const addressTwoRef = useRef(null);
+    const addressThreeRef = useRef(null);
+    const addressFourRef = useRef(null);
+    const addressFiveRef = useRef(null);
+    const stateNameRef = useRef(null);
+    const countryNameRef = useRef(null);
+    const pinCodeRef = useRef(null);
+    const provideBankDetailsRef = useRef(null);
+    const panOrItNumberRef = useRef(null);
+    const registrationTypeRef = useRef(null);
+    const gstOrUinRef = useRef(null);
+    const setOrAlterGstDetailsRef = useRef(null);
+    const openingBalanceRef = useRef(null);
+    const submitButtonRef = useRef(null);
+    
+
+
+
+    const countries = [
+        "Afghanistan", "Algeria", "Angola", "Argentina", "Australia", "Bangladesh", "Belgium", "Benin", "Bhutan", 
+        "Bolivia", "Botswana", "Brazil", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Chad", 
+        "Chile", "China", "Colombia", "Cote d'Ivoire (Ivory Coast)", "Cuba", "Czech Republic", "Dominican Republic", 
+        "Ecuador", "Egypt", "Ethiopia", "France", "Germany", "Ghana", "Greece", "Guatemala", "Guinea", "Haiti", 
+        "Hong Kong", "India", "Indonesia", "Iran", "Iraq", "Italy", "Japan", "Kazakhstan", "Kenya", 
+        "Kingdom of Bahrain", "Kuwait", "Liberia", "Madagascar", "Malawi", "Malaysia", "Mali", "Mexico", 
+        "Morocco", "Mozambique", "Myanmar (Burma)", "Nepal", "Netherlands", "Niger", "Nigeria", 
+        "North Korea (DPRK)", "Pakistan", "Peru", "Philippines", "Poland", "Portugal", "Qatar", 
+        "Republic Of The CongoDemocratic", "Romania", "Russia", "Rwanda", "Saudi Arabia", "Senegal", 
+        "Singapore", "South Africa", "South Korea (ROK)", "Spain", "Sri Lanka", "Sudan", "Sultanate of Oman", 
+        "Syria", "Tanzania", "Thailand", "Tunisia", "Turkey", "UAE", "Uganda", "UK", "Ukraine", 
+        "United States of America", "Uzbekistan", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+      ];
+
+
+      const statesByCountry = {
+        Afghanisthan: [],
+        Algeria: [],
+        Angola: [],
+        Argentina: [],
+        Australia: [],
+        Bangladesh: ["Barisal", "Chittagong", "Dhaka", "Khulna", "Mymesingh", "Rajshahi", "Rangpur", "Sylhet"],
+        Belgium: [],
+        Benin: [],
+        Bhutan: ["Bumthang", "Chukha", "Dagana", "Gasa", "Haa", "Lhuntse", "Mongar", "Paro", "Pemagatshel", "Punakha", "Samdrup Jongkhar", "Samtse", "Sarpang", "Thimphu", "Trashigang", "Trashiyangtse", "Trongsa", "Tsirang", "Wangdue Phodrang", "Zhemgang"],
+        Bolivia: [],
+        Botswana: ["Central", "Chobe", "Francistown", "Gaborone", "Ghanzi", "Jwaneng", "Kgalagadi", "Kweneng", "Lobatse", "Ngamiland", "North-East", "Orapa", "Selebi-Phikwe", "South-East", "Southern", "Sowa"],
+        Brazil: [],
+        Burkina_Faso: [],
+        Burundi: [],
+        Cambodia: [],
+        Cameroon: [],
+        Canada: [],
+        Chad: [],
+        Chile: [],
+        China: [],
+        Colombia: [],
+        Cote : [],
+        Cuba: [],
+        Czech_Republic: [],
+        Dominican_Republic: [],
+        Ecuador: [],
+        Egypt: ["Alexnadria", "Aswan", "Asyut", "Beheira", "Beni suef", "Cairo", "Dakahlia", "Damietta", "Faiyum", "Gharbia", "Giza", "Isamailia", "Kafr El Sheikh", "Luxor", "Matruh", "Minya", "Monufia", "New Valley", "North Sinai", "Port Said", "Qalyubia", "Qena", "Red Sea", "Sharqia", "Sohang", "South Sinai", "Suez"],
+        Ethiopia: [],
+        France: [],
+        Germany: [],
+        Ghana: ["Ashanti", "Brong Ahafo", "Central", "Eastern", "Greater Accra", "Northern", "Upper East", "Upper West", "Volta", "Western"],
+        Greece: [],
+        Guatemala: [],
+        Guinea: [],
+        Haiti: [],
+        Hong_Kong: ["Central and Western", "Eastern", "Islands", "Kowloon City", "Kwai Tsing", "Kwun Tong", "North", "Sai Kung", "Sham Shui Po", "Sha Tin", "Southern", "Tai Po", "Tsuen Wan", "Tuen Mun", "Wan Chai", "Wong Tai Sin", "Yau Tsim Mong", "Yuen Long"], 
+        India: ["Andaman & Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli & Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Ladakh", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttarakhand", "Uttar Pradesh", "West Bengal"],
+        Indonesia: ["Bali", "Banten", "Bengkulu", "DI Yogyakarta", "DKI Jakarta", "Gorontalo", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung", "Maluku", "Maluku Utara", "Nangrroe Aceh Darussalam", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara"],
+        Iran: [],
+        Iraq: [],
+        Italy: [],
+        Japan: [],
+        Kazakhstan: [],
+        Kenya: ["Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Muranga", "Nairobi City", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita Taveta", "Tana River", "Tharaka Nithi", "Trans Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"],
+        Kingdom_of_Bahrain: ["Capital", "Muharraq", "Northern", "Southern"],
+        Kuwait: ["Al Ahmadi", "Al Asimah", "Al Farwaniyah", "Al Jahra", "Hawalli", "Mubarak Al-Kabeer"],
+        Liberia: ["Bomi", "Bong", "Gbarpolu", "Grand Bassa", "Grand Cape Mount", "Grand Gedeh", "Grand Kru", "Lofa", "Margibi", "Maryland", "Montserrado", "Nimba", "Rivercess", "River Gee", "Sinoe"],
+        Madagascar: [],
+        Malawi: ["Balaka", "Blantyre", "Chikwawa", "Chiradzulu", "Chitipa", "Dedza", "Dowa", "Karonga", "Kasungu", "Likoma", "Lilongwe", "Machinga", "Mnagochi", "Mchinji", "Mulanje", "Mwanza", "Mzimba", "Neno", "Nkhata Bay", "Nkhotakota", "Nsanje", "Ntcheu", "Ntchisi", "Phalombe", "Rumphi", "Salima", "Thyolo", "Zomba"],
+        Malaysia: ["Johor Darul Ta'zim", "Kedah Darul Aman", "Kelantan Darul Naim", "Kuala Lampur", "Labuan", "Melacca", "Negeri Sembilan Darul Khusus", "Pahang Darul Makmur", "Penang", "Perak Darul Ridzuan", "Perlis Indrea Kayangan", "Putrajaya", "Sabh", "Sarawak", "Selangor Darul Ehsan", "Terengganu Darul Iman"],
+        Mali: [],
+        Mexico: [],
+        Morocco: [],
+        Mozambique: [],
+        Myanmar: ["Ayeyarwady", "Bago", "Chin", "Kachin", "Kayah", "Kayin", "Magway", "Mandalay", "Mon", "Naypyidaw", "Rakhine", "Sagaing", "Shan", "Tanintharyi", "Yangon"],
+        Nepal: ["Bagmati", "Far West", "Gandaki", "Janakpur", "Karnali", "Koshi", "Lumbini"],
+        Netherlands: [],
+        Niger: [],
+        Nigeria: ["Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", "Cross River", "Delta", "Ebonyl", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigwa", "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"],
+        North_Korea: [],
+        Pakisthan: [],
+        Peru: [],
+        Philippines: ["Bicol Region", "Cagayan Valley", "Calabarzon", "Caraga Region", "Central Luzon", "Central Visayas", "Cordilera Administrative Region", "Davao Region", "Eastern Visayas", "Llocos Region", "National Capital Region", "Northern Mindanao", "Soccsksargen", "Southwestern Tagalog Region", "Western Visayas", "Zamboanga Peninsula"],
+        Poland: [],
+        Portugal: [],
+        Qatar: ["Ad Dawhah", "Al Khawr wa adh Dhakhirah", "Al Wakrah", "Ar Rayyan", "Ash Shamal", "Ash Shihaniyah", "Az Zaayin", "Umm Salal"],
+        Republic_Of_The_CongoDemocratic: [],
+        Romania: [],
+        Russia: [],
+        Rwanda: [],
+        Saudi_Arabia: ["Al Madinah", "Al-Qassim", "Ash-Sharqiyyah", "Asir", "Ha'il", "Makkah", "Najran", "Riyadh", "Tabuk"],
+        Senegal: [],
+        Singapore: [],
+        South_Africa: ["Eastern Cape", "Free State", "Gauteng", "KwaZulu-Natal", "Limpopo", "Mpumalanga", "Northern Cape", "North West", "Western Cape"],
+        South_Korea: [],
+        Spain: [],
+        Sri_Lanka: ["Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo", "Galle", "Gampaha", "Hambantota", "Jaffna", "Kalutara", "Kandy", "Kegalle", "Kilinochchi", "Kurunegala", "Mannar", "Matale", "Matara", "Monaragala", "Mullaitivu", "Nuwara Eliya", "Polonnaruwa", "Puttalam", "Ratnapura", "Trincomalee", "Vavuniya"],
+        Sudan: [],
+        Sultanate_of_Oman: ["Al Batinah North", "Al Batinah South", "Al Buraimi", "Al Dhahira", "Al Shariyah North", "Al Shariyah South", "Al Wusta", "Dakhiliya", "Dhofar", "Musandam", "Muscat"],
+        Syria: [],
+        Tanzania: ["Arusha", "Dar es Salaam", "Dodoma", "Geita", "Iringa", "Kagera", "Katavi", "Kigoma", "Kilimanjaro", "Lindi", "Manyara", "Mara", "Mbeya", "Morogoro", "Mtwara", "Mwanza", "Njombe", "Pemba North", "Pemba South", "Pwani", "Rukwa", "Ruvuma", "Shinyanga", "Simiyu", "Singida", "Songwe", "Tabora", "Tanga", "Zanzibar North", "Zanzibar South", "Zanzibar Urban West"],
+        Thailand: ["Amnat Charoen", "Ang Thong", "Bangkok", "Bueng Kan", "Buriram", "Chachoengsao", "Chai Nat", "Chaiyaphum", "Chanthaburi", "Chiang Mai", "Chiang Rai", "Chonburi", "Chumphon", "Kalasin", "Kamphaeng Phet", "Kanchanaburi", "Khon Kaen", "Krabi", "Lampang", "Lamphun", "Loei", "Lopburi", "Mae Hong Son", "Maha Sarkham", "Mukdahan", "Nakhon Nayok", "Nakhon Pathom", "Nakhon Phanom", "Nakhon Ratchasima", "Nakhon Sawan", "Nakhon Si Thammarat", "Nan", "Narathiwat", "Nong Bua Lam Phu", "Nong Khai", "Nonthaburi", "Pathum Thani", "Pattani", "Phang Nga", "Phatthalung", "Phayao", "Phetchabun", "Phetchaburi", "Phichit", "Phitsanulok", "Phrae", "Phra Nakhon Si Ayutthaya", "Phuket", "Prachinburi", "Prachuap Khiri Khan", "Ranong", "Ratchaburi", "Rayong", "Roi Et", "Sa Kaeo", "Sakon Nakhon", "Samut Prakan", "Samut Sakhon", "Samut Songkhram", "Saraburi", "Satun", "Sing Buri", "Sisaket", "Songkhla", "Sukhothai", "Suphan Buri", "Surat Thani", "Surin", "Tak", "Trang", "Trat", "Ubon Ratchathani", "Udon Thani", "Uthai Thani", "Uttaradit", "Yala", "Yasothon" ],
+        Tunisia: [],
+        Turkey: [],
+        UAE: ["Abu Dhabi", "Ajman", "Dubai", "Fujairah", "Ras al-Khaimah", "Sharjah", "Umm al-Quwain"],
+        Uganda: [
+            "Abim", "Adjumani", "Agago", "Alebtong", "Amolatar", "Amudat", "Amuria", "Amuru", "Apac", "Arua", "Budaka", "Bududa", "Bugiri",
+            "Bugweri", "Buhweju", "Buikwe", "Bukedea", "Bukomansimbi", "Bukwo", "Bulambuli", "Buliisa", "Bundibugyo", "Bunyangabu", "Bushenyi",
+            "Busia", "Butaleja", "Butambala", "Butebo", "Buvuma", "Buyende", "Dokolo", "Gomba", "Gulu", "Hoima", "Ibanda", "Iganga", "Isingiro",
+            "Jinja", "Kaabong", "Kabale", "Kabarole", "Kaberamaido", "Kabingo", "Kagadi", "Kakumiro", "Kalangala", "Kaliro", "Kalungu", "Kampala",
+            "Kamuli", "Kamwenge", "Kanungu", "Kapchorwa", "Kapelebyong", "Karenga", "Kassanda", "Kazo", "Kayunga", "Kibaale", "Kiboga", "Kibuku",
+            "Kikuube", "Kiruhura", "Kiryandongo", "Kisoro", "Kitagwenda", "Kitgum", "Koboko", "Kole", "Kotido", "Kumi", "Kwania", "Kween", "Kyankwanzi",
+            "Kyegegwa", "Kyenjojo", "Kyotera", "Lamwo", "Lira", "Luuka", "Luwero", "Lwengo", "Lyantonde", "Manafwa", "Maracha", "Masaka", "Masindi",
+            "Mayuge", "Mbale", "Mbarara", "Mitooma", "Mityana", "Moroto", "Moyo", "Mpigi", "Mubende", "Mukono", "Nabilatuk", "Nakapiripirit", "Nakaseke",
+            "Nakasongola", "Namayingo", "Namisindwa", "Namutumba", "Napak", "Nebbi", "Ngora", "Ntoroko", "Ntungamo", "Nwoya", "Obongi", "Omoro", "Otuke",
+            "Oyam", "Pader", "Pakwach", "Pallisa", "Rakai", "Rubanda", "Rubirizi", "Rukiga", "Rukungiri", "Rwampara", "Serere", "Sheema", "Sironko",
+            "Soroti", "Tororo", "Wakiso", "Yumbe", "Zombo"
+        ],
+        UK: ["England", "Northern Ireland", "Scotland", "Wales"],
+        Ukraine: [],
+        United_Staes_of_America: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"],
+        Uzbekistan: [],
+        Venezuela: [],
+        Vietnam: [],
+        Yemen: [],
+        Zambia: ["Central", "Copperbelt", "Eastern", "Luapula", "Lusaka", "Muchinga", "Northern", "North-Western", "Southern", "Western"],
+        Zimbabwe: []
+      };
+      
+
+
+      
 
 
     const navigator = useNavigate();
@@ -152,19 +351,46 @@ const NewLedgerCreate = () => {
     }
 
     useEffect(() => {
+        inputRef.current.focus();
         hideElements();
         handleUnderGroupChange({ target: { value: underGroup } });
+
+
+
+        const handleFocus = () => {
+            console.log("Input Focused");
+
+            setShowMirroringOptions(true);
+
+        };
+        
+        const handleBlur = () => {
+            console.log("Input Blured");
+
+            setShowMirroringOptions(false);
+        };
+
+        const inputElement = underGroupRef.current;
+
+        inputElement.addEventListener('focus', handleFocus);
+        // inputElement.addEventListener('blur', handleBlur);
+
+        return () => {
+            inputElement.removeEventListener('focus', handleFocus);
+            inputElement.removeEventListener('blur', handleBlur);
+        };
+
     }, []);
 
-    const handleUnderGroupChange = (e) => {
-        const newValue = e.target.value;
-        setUnderGroup(newValue);
+    const handleUnderGroupChange = (newUnderGroup) => {
+       
+        setUnderGroup(newUnderGroup);
         setSubUnder("");
-        updateSubUnder(newValue); // <-- Call the function like this
+        updateSubUnder(newUnderGroup); // <-- Call the function like this
 
         hideElements();
        
-        switch(newValue) {
+        switch(newUnderGroup) {
             case "Capital Account":
                 showElements(["costsCentresAreApplicable","stateName", "countryName", "pinCode", "headUnderFive", "provideBankDetails", "panOrItNumber", "registrationType", "gstOrUin", "setOrAlterGstDetails"]);
                 break;
@@ -277,6 +503,42 @@ const NewLedgerCreate = () => {
     };
 
 
+
+    const underGroupToNextInputRef = {
+         'Bank Accounts': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, accountHoldersNameRef, accountNumberRef, ifscCodeRef, swiftCodeRef, bankNameRef, branchNameRef, alterRangeForChequeBooksRef, enableChequePrintingRef, alterChequePrintingConfigurationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, gstOrUinRef, openingBalanceRef, submitButtonRef], 
+         'Bank OCC A/c' : [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, odLimitRef, accountHoldersNameRef, accountNumberRef, ifscCodeRef, swiftCodeRef, bankNameRef, branchNameRef, alterRangeForChequeBooksRef, enableChequePrintingRef, alterChequePrintingConfigurationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, gstOrUinRef, openingBalanceRef, submitButtonRef],
+         'Bank OD A/c' : [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, odLimitRef, accountHoldersNameRef, accountNumberRef, ifscCodeRef, swiftCodeRef, bankNameRef, branchNameRef, alterRangeForChequeBooksRef, enableChequePrintingRef, alterChequePrintingConfigurationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, gstOrUinRef, openingBalanceRef, submitButtonRef],        
+         'Branch / Divisions': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
+         'Capital Account': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
+         'Cash-in-Hand': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
+         'Current Assets': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef,  openingBalanceRef, submitButtonRef],
+         'Current Liabilities': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
+         'Deposits (Asset)': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
+         'Direct Expenses': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Direct Incomes': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Duties & Taxes': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfDutyOrTaxRef, costsCentresAreApplicableRef, percentageOfCalculationRef, includeInAssessableValueCalculationRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Fixed Assets': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
+         'Indirect Expenses': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Indirect Incomes': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Investments': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
+         'Loans & Advances (Asset)': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
+         'Loans (Liability)': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
+         'Misc. Expenses (ASSET)': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Provisions': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Purchase Accounts': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Reserves & Surplus': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Retained Earnings': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Sales Accounts': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Secured Loans': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
+         'Stock-in-Hand': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Sundry Creditors': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, maintainBalancesBillByBillRef, defaultCreditPeriodRef, checkForCreditDaysDuringVoucherEntryRef, costsCentresAreApplicableRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
+         'Sundry Debtors': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, maintainBalancesBillByBillRef, defaultCreditPeriodRef, checkForCreditDaysDuringVoucherEntryRef, costsCentresAreApplicableRef, contactPersonRef, contactPhoneNumberRef, mobileNumberRef, emailRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
+         'Suspense A/c': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
+         'Unsecured Loans': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef]
+     };
+ 
+
+
     window.onload = function () {
         const underGroupSelect = document.getElementById("underGroup");
     
@@ -359,101 +621,9 @@ const NewLedgerCreate = () => {
 
 
 
-
-
-
-     // Refs
-     const inputRef = useRef(null);
-     const tallySerialNoRef = useRef(null);
-     const aliasNameRef = useRef(null);
-     const underGroupRef = useRef(null);
-     const typeOfLedgerRef = useRef(null);
-     const maintainBalancesBillByBillRef = useRef(null);
-     const defaultCreditPeriodRef = useRef(null);
-     const checkForCreditDaysDuringVoucherEntryRef = useRef(null);
-     const typeOfDutyOrTaxRef = useRef(null);
-     const costsCentresAreApplicableRef = useRef(null);
-     const percentageOfCalculationRef = useRef(null);
-     const odLimitRef = useRef(null);
-     const includeInAssessableValueCalculationRef = useRef(null);
-     const gstApplicabilityRef = useRef(null);
-     const hsnOrSacAndRelatedDetailsRef = useRef(null);
-     const sourceOfDetailsRef = useRef(null);
-     const hsnOrSacRef = useRef(null);
-     const hsnOrSacDescriptionRef = useRef(null);
-     const classificationRef = useRef(null);
-     const gstRateDetailsRef = useRef(null);
-     const sourceOfDetailsGstRef = useRef(null);
-     const taxabilityTypeRef = useRef(null);
-     const natureOfTransactionRef = useRef(null);
-     const igstRateRef = useState(null);
-     const cgstRateRef = useState(null);
-     const utgstRateRef = useState(null);
-     const typeOfSupplyRef = useState(null);
-     const accountHoldersNameRef = useRef(null);
-     const accountNumberRef = useRef(null);
-     const ifscCodeRef = useRef(null);
-     const swiftCodeRef = useRef(null);
-     const bankNameRef = useRef(null);
-     const branchNameRef = useRef(null);
-     const alterRangeForChequeBooksRef = useRef(null);
-     const enableChequePrintingRef = useRef(null);
-     const alterChequePrintingConfigurationRef = useRef(null);
-     const contactPersonRef = useRef(null);
-     const contactPhoneNumberRef = useRef(null);
-     const mobileNumberRef = useRef(null);
-     const emailRef = useRef(null);
-     const mailingNameRef = useRef(null);
-     const addressOneRef = useRef(null);
-     const addressTwoRef = useRef(null);
-     const addressThreeRef = useRef(null);
-     const addressFourRef = useRef(null);
-     const addressFiveRef = useRef(null);
-     const stateNameRef = useRef(null);
-     const countryNameRef = useRef(null);
-     const pinCodeRef = useRef(null);
-     const provideBankDetailsRef = useRef(null);
-     const panOrItNumberRef = useRef(null);
-     const registrationTypeRef = useRef(null);
-     const gstOrUinRef = useRef(null);
-     const setOrAlterGstDetailsRef = useRef(null);
-     const openingBalanceRef = useRef(null);
-     const submitButtonRef = useRef(null);
  
  
-     const underGroupToNextInputRef = {
-         'Bank Accounts': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, accountHoldersNameRef, accountNumberRef, ifscCodeRef, swiftCodeRef, bankNameRef, branchNameRef, alterRangeForChequeBooksRef, enableChequePrintingRef, alterChequePrintingConfigurationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, gstOrUinRef, openingBalanceRef, submitButtonRef], 
-         'Bank OCC A/c' : [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, odLimitRef, accountHoldersNameRef, accountNumberRef, ifscCodeRef, swiftCodeRef, bankNameRef, branchNameRef, alterRangeForChequeBooksRef, enableChequePrintingRef, alterChequePrintingConfigurationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, gstOrUinRef, openingBalanceRef, submitButtonRef],
-         'Bank OD A/c' : [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, odLimitRef, accountHoldersNameRef, accountNumberRef, ifscCodeRef, swiftCodeRef, bankNameRef, branchNameRef, alterRangeForChequeBooksRef, enableChequePrintingRef, alterChequePrintingConfigurationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, gstOrUinRef, openingBalanceRef, submitButtonRef],        
-         'Branch / Divisions': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
-         'Capital Account': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
-         'Cash-in-Hand': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
-         'Current Assets': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef,  openingBalanceRef, submitButtonRef],
-         'Current Liabilities': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
-         'Deposits (Asset)': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
-         'Direct Expenses': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Direct Incomes': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Duties & Taxes': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfDutyOrTaxRef, costsCentresAreApplicableRef, percentageOfCalculationRef, includeInAssessableValueCalculationRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Fixed Assets': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
-         'Indirect Expenses': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Indirect Incomes': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Investments': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
-         'Loans & Advances (Asset)': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
-         'Loans (Liability)': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
-         'Misc. Expenses (ASSET)': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Provisions': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Purchase Accounts': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Reserves & Surplus': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Retained Earnings': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Sales Accounts': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, typeOfLedgerRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, gstApplicabilityRef, hsnOrSacAndRelatedDetailsRef, sourceOfDetailsRef, hsnOrSacRef, hsnOrSacDescriptionRef, gstRateDetailsRef, sourceOfDetailsGstRef, taxabilityTypeRef, natureOfTransactionRef, igstRateRef, cgstRateRef, utgstRateRef, typeOfSupplyRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Secured Loans': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, openingBalanceRef, submitButtonRef],
-         'Stock-in-Hand': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Sundry Creditors': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, maintainBalancesBillByBillRef, defaultCreditPeriodRef, checkForCreditDaysDuringVoucherEntryRef, costsCentresAreApplicableRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
-         'Sundry Debtors': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, maintainBalancesBillByBillRef, defaultCreditPeriodRef, checkForCreditDaysDuringVoucherEntryRef, costsCentresAreApplicableRef, contactPersonRef, contactPhoneNumberRef, mobileNumberRef, emailRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef],
-         'Suspense A/c': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, provideBankDetailsRef, openingBalanceRef, submitButtonRef],
-         'Unsecured Loans': [inputRef, tallySerialNoRef, aliasNameRef, underGroupRef, costsCentresAreApplicableRef, includeInAssessableValueCalculationRef, mailingNameRef, addressOneRef, addressTwoRef, addressThreeRef, addressFourRef, addressFiveRef, stateNameRef, countryNameRef, pinCodeRef, provideBankDetailsRef, panOrItNumberRef, registrationTypeRef, gstOrUinRef, setOrAlterGstDetailsRef, openingBalanceRef, submitButtonRef]
-     };
- 
+     
  
  
      
@@ -499,13 +669,28 @@ const NewLedgerCreate = () => {
 
 
 
+     
 
 
-    function saveLedger(e){
-        e.preventDefault();
+
+      const handleCountryChange = (e) => {
+        setCountryName(e.target.value);
+        setStateName('');  // Reset state selection when country changes
+      };
+
+      const handleStateChange = (e) => {
+        setStateName(e.target.value);
+      }
 
 
-            if(validateForm()){
+    
+
+
+    const confirmSave = () => {
+        setIsModalVisible(false);
+
+
+        if(validateForm()){
             const ledger = {ledgerName, tallySerialNo, aliasName, underGroup, subUnder, typeOfLedger, maintainBalancesBillByBill, defaultCreditPeriod, checkForCreditDaysDuringVoucherEntry, typeOfDutyOrTax, costsCentresAreApplicable, percentageOfCalculation, odLimit, includeInAssessableValueCalculation, gstApplicability, hsnOrSacAndRelatedDetails, sourceOfDetails, hsnOrSac, hsnOrSacDescription, classification, gstRateDetails, taxabilityType, natureOfTransaction, igstRate, cgstRate, utgstRate, typeOfSupply, accountHoldersName, accountNumber, ifscCode, swiftCode, bankName, branchName, alterRangeForChequeBooks, enableChequePrinting, alterChequePrintingConfiguration, contactPerson, contactPhoneNumber, mobileNumber, email, mailingName, addressOne, addressTwo, addressThree, addressFour, addressFive, stateName, countryName, pinCode, provideBankDetails, panOrItNumber, registrationType, gstOrUin, setOrAlterGstDetails, openingBalance};
 
             console.log(ledger);
@@ -521,18 +706,22 @@ const NewLedgerCreate = () => {
         
     };
 
-    
-   
+
+    const cancelSave = () => {
+        setIsModalVisible(false);
+    }
 
 
     
-
-
-   
     
-   
-    
+  
+    function saveLedger(e){
+        e.preventDefault();
+        setIsModalVisible(true);
 
+
+        
+    };
     
 
 
@@ -592,42 +781,11 @@ const NewLedgerCreate = () => {
                                 <div className='ml-2'>
 
                                     <label htmlFor="underGroup" className='mr-[225px]' >Under</label>
-                                    : <select name="underGroup" id="underGroup" className='w-[185px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={underGroup} onChange={ handleUnderGroupChange} ref={underGroupRef} onKeyDown={(e) => { if (e.key === 'Tab') { hanldeTabPress(e); } else if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, underGroupRef, underGroup); } }}>
-                                        <option value="Bank Accounts">Bank Accounts</option>
-                                        <option value="Bank OCC A/c">Bank OCC A/c</option>
-                                        <option value="Bank OD A/c">Bank OD A/c</option>
-                                        <option value="Branch / Divisions">Branch / Divisions</option>
-                                        <option value="Capital Account">Capital Account</option>
-                                        <option value="Cash-in-Hand">Cash-in-Hand</option>
-                                        <option value="Current Assets">Current Assets</option>
-                                        <option value="Current Liabilities">Current Liabilities</option>
-                                        <option value="Deposits (Asset)">Deposits (Asset)</option>
-                                        <option value="Direct Expenses">Direct Expenses</option>
-                                        <option value="Direct Incomes">Direct Incomes</option>
-                                        <option value="Duties & Taxes">Duties & Taxes</option>
-                                        <option value="Fixed Assets">Fixed Assets</option>
-                                        <option value="Indirect Expenses">Indirect Expenses</option>
-                                        <option value="Indirect Incomes">Indirect Incomes</option>
-                                        <option value="Investments">Investments</option>
-                                        <option value="Loans & Advances (Asset)">Loans & Advances (Asset)</option>
-                                        <option value="Loans (Liability)">Loans (Liability)</option>
-                                        <option value="Misc. Expenses (ASSET)">Misc. Expenses (ASSET)</option>
-                                        <option value="Provisions">Provisions</option>
-                                        <option value="Purchase Accounts">Purchase Accounts</option>
-                                        <option value="Reserves & Surplus">Reserves & Surplus</option>
-                                        <option value="Retained Earnings">Retained Earnings</option>
-                                        <option value="Sales Accounts">Sales Accounts</option>
-                                        <option value="Secured Loans">Secured Loans</option>
-                                        <option value="Stock-in-Hand">Stock-in-Hand</option>
-                                        <option value="Sundry Creditors">Sundry Creditors</option>
-                                        <option value="Sundry Debtors">Sundry Debtors</option>
-                                        <option value="Suspense A/c">Suspense A/c</option>
-                                        <option value="Unsecured Loans">Unsecured Loans</option>
-                                        </select>
+                                    : <input type="text" id='underGroup' name='underGroup' className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' value={underGroup} onChange={(e) => setUnderGroup(e.target.value)}  ref={underGroupRef} onKeyDown={(e) => { if (e.key === 'Tab') { hanldeTabPress(e); } else if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, underGroupRef, underGroup); } }} readOnly />
 
-                                       
 
                                 </div>
+                                
 
                                 <div>
                                     <label htmlFor="subUnder"></label>
@@ -953,85 +1111,25 @@ const NewLedgerCreate = () => {
 
                                 <div className='input-ldgr ml-2' id='stateName'>
                                     <label htmlFor="stateName" className='mr-[158px]'>State</label>
-                                    : <select name="stateName" id="stateName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={stateName} onChange={(e) => setStateName(e.target.value)}  ref={stateNameRef} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, stateNameRef, underGroup); } }}  >
+                                    : <select name="stateName" id="stateName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={stateName} onChange={(e) => {setStateName(e.target.value); handleStateChange}}  ref={stateNameRef} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, stateNameRef, underGroup); } }}  >
                                         <option value="New State">New State</option>
                                         <option value="Change Country">Change Country</option>
                                         <option value="Not Applicable">&diams;Not Applicable</option>
-                                        <option value="Andaman & Nicobar Islands">Andaman & Nicobar Islands</option>
-                                        <option value="Andra Pradesh">Andra Pradesh</option>
-                                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                        <option value="Assam">Assam</option>
-                                        <option value="Chandigarh">Chandigarh</option>
-                                        <option value="Chhattisgarh">Chhattisgarh</option>
-                                        <option value="Dadra & Nagar Haveli & Daman & Diu">Dadra & Nagar Haveli & Daman & Diu</option>
-                                        <option value="Delhi">Delhi</option>
-                                        <option value="Goa">Goa</option>
-                                        <option value="Gujarat">Gujarat</option>
-                                        <option value="Haryana">Haryana</option>
-                                        <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                        <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-                                        <option value="Jharkhand">Jharkhand</option>
-                                        <option value="Karnataka">Karnataka</option>
-                                        <option value="Kerala">Kerala</option>
-                                        <option value="Ladakh">Ladakh</option>
-                                        <option value="Lakshadweep">Lakshadweep</option>
-                                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                        <option value="Maharashtra">Maharashtra</option>
-                                        <option value="Manipur">Manipur</option>
-                                        <option value="Meghalaya">Meghalaya</option>
-                                        <option value="Mizoram">Mizoram</option>
-                                        <option value="Nagaland">Nagaland</option>
-                                        <option value="Odisha">Odisha</option>
-                                        <option value="Puducherry">Puducherry</option>
-                                        <option value="Punjab">Punjab</option>
-                                        <option value="Rajasthan">Rajasthan</option>
-                                        <option value="Sikkim">Sikkim</option>
-                                        <option value="TamilNadu">TamilNadu</option>
-                                        <option value="Telangana">Telangana</option>
-                                        <option value="Tripura">Tripura</option>
-                                        <option value="Uttarakhand">Uttarakhand</option>
-                                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                        <option value="West Bengal">West Bengal</option>
+                                        {statesByCountry[countryName]?.map((state, index) => (
+                                            <option key={index} value={state}>{state}</option>
+                                        ))}
                                     </select>
                                 </div>
 
                                 <div className='input-ldgr ml-2' id='countryName'>
                                     <label htmlFor="countryName" className='mr-[140px]'>Country</label>
-                                    : <select name="countryName" id="countryName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={countryName} onChange={(e) => setCountryName(e.target.value)}  ref={countryNameRef} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, countryNameRef, underGroup); } }} >
+                                    : <select name="countryName" id="countryName" className='w-[165px] font-semibold h-5 outline-none focus:bg-yellow-200 focus:border border border-transparent focus:border-blue-500 ' value={countryName} onChange={(e) => {setCountryName(e.target.value); handleCountryChange}}  ref={countryNameRef} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, countryNameRef, underGroup); } }} >
                                         <option value="New Country">New Country</option>
                                         <option value="Show More">Show More</option>
                                         <option value="Not Applicable">&diams;Not Applicable</option>
-                                        <option value="Bangladesh">Bangladesh</option>
-                                        <option value="Bhutan">Bhutan</option>
-                                        <option value="Botswana">Botswana</option>
-                                        <option value="Egypt">Egypt</option>
-                                        <option value="Ghana">Ghana</option>
-                                        <option value="Hong Kong">Hong Kong</option>
-                                        <option value="India">India</option>
-                                        <option value="Indonesia">Indonesia</option>
-                                        <option value="Kenya">Kenya</option>
-                                        <option value="Kingdom of Bahrain">Kingdom of Bahrain</option>
-                                        <option value="Kuwait">Kuwait</option>
-                                        <option value="Liberia">Liberia</option>
-                                        <option value="Malawi">Malawi</option>
-                                        <option value="Malaysia">Malaysia</option>
-                                        <option value="Myanmar (Burma)">Myanmar (Burma)</option>
-                                        <option value="Nepal">Nepal</option>
-                                        <option value="Nigeria">Nigeria</option>
-                                        <option value="Philippines">Philippines</option>
-                                        <option value="Qatar">Qatar</option>
-                                        <option value="Saudi Arabia">Saudi Arabia</option>
-                                        <option value="Singapore">Singapore</option>
-                                        <option value="South Africa">South Africa</option>
-                                        <option value="Sri Lanka">Sri Lanka</option>
-                                        <option value="Sultanate of Oman">Sultanate of Oman</option>
-                                        <option value="Tanzania">Tanzania</option>
-                                        <option value="Thailand">Thailand</option>
-                                        <option value="UAE">UAE</option>
-                                        <option value="Uganda">Uganda</option>
-                                        <option value="UK">UK</option>
-                                        <option value="United Staes of America">United Staes of America</option>
-                                        <option value="Zambia">Zambia</option>
+                                        {countries.map((country, index) => (
+                                            <option key={index} value={country}>{country}</option>
+                                        ))}
                                     </select>
                                 </div>
 
@@ -1092,7 +1190,7 @@ const NewLedgerCreate = () => {
                         </div>
 
                         <div className='open-balance flex justify-center p-[2px]'>
-                            <h3 className='text-sm'>Opening Balance <span className='pl-5'>( on 1-Apr-24):</span> Rs.<input type="number" id='openingBalance' name='openingBalance' value={openingBalance} onChange={(e) => setOpeningBalance(e.target.value)} className='h-5 w-[80px] outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off'  ref={openingBalanceRef} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, openingBalanceRef, underGroup); } }} />/-</h3>
+                            <h3 className='text-sm'>Opening Balance <span className='pl-5'>( on 1-Apr-24):</span> Rs.<input type="number" id='openingBalance' name='openingBalance' value={openingBalance} onChange={(e) => setOpeningBalance(e.target.value)} className='h-5 w-[80px] outline-none pl-1 focus:bg-yellow-200 focus:border focus:border-blue-500' autoComplete='off'  ref={openingBalanceRef} onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, openingBalanceRef, underGroup); } }} /></h3>
                         </div>
 
                         <div className='flex justify-center'>
@@ -1101,13 +1199,38 @@ const NewLedgerCreate = () => {
 
                             <button type='submit' className='text-sm px-8 py-1 mt-3 border-none hover:bg-slate-400' onClick={saveLedger} ref={submitButtonRef}   >A: Accept</button>
 
-                        </div>   
+                        </div>
+
+
+                        {/* Conditional rendering of MirroringOptions */}
+                        {showMirroringOptions && (
+                            <div className='mirroring-options'>
+                                {/* Your mirroring options go here */}
+                                    
+                                    <MirroringOptions handleUnderGroupChange={handleUnderGroupChange} />
+                            </div>
+                        )} 
 
                         
                         
 
 
-                    </form>    
+                    </form>
+
+
+                    {isModalVisible && (
+                        <div className='modal-overlay fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50'>
+                            <div className='modal bg-white p-6 rounded'>
+                                <h3 className='text-lg font-semibold mb-4'>Confirm Save</h3>
+                                <p className='mb-4'>Are you want to save this ledger?.</p>
+
+                                <div className='flex justify-end'>
+                                    <button className='text-sm px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded mr-2' onClick={() => cancelSave()}>No</button>
+                                    <button className='text-sm px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded' onClick={() => confirmSave()}>Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}    
                 </div>
 
                 <div className='w-[15%] border-l'></div>
