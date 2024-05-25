@@ -3,6 +3,7 @@ import { IoClose } from "react-icons/io5";
 import { createNewLedger } from '../services/NewLedgerCreateService';
 import { Link, useNavigate } from 'react-router-dom';
 import Bank from '../assets/Bank';
+
 import MirroringOptions from './MirroringOptions';
 
 
@@ -14,7 +15,7 @@ const NewLedgerCreate = () => {
     const [ledgerName, setLedgerName] = useState('');
     const [tallySerialNo, setTallySerialNo] = useState('');
     const [aliasName, setAliasName] = useState('');
-    const [underGroup, setUnderGroup] = useState('');
+    const [underGroup, setUnderGroup] = useState('Capital Account');
 
     
 
@@ -25,7 +26,7 @@ const NewLedgerCreate = () => {
     const [checkForCreditDaysDuringVoucherEntry, setCheckForCreditDaysDuringVoucherEntry] = useState('No');
     const [typeOfDutyOrTax, setTypeOfDutyOrTax] = useState('Others');
     const [costsCentresAreApplicable, setCostsCentresAreAplicable] = useState('No');
-    const [percentageOfCalculation, setPercentageOfCalculation] = useState('0');
+    const [percentageOfCalculation, setPercentageOfCalculation] = useState(0);
     const [odLimit, setOdLimit] = useState('');
     const [includeInAssessableValueCalculation, setIncludeInAssessableValueCalculation] = useState('');
     const [gstApplicability, setGstApplicability] = useState('');
@@ -38,9 +39,9 @@ const NewLedgerCreate = () => {
     const [sourceOfDetailsGst, setSourceOfDetailsGst] = useState('Not Available');
     const [taxabilityType, setTaxabilityType] = useState('Taxable');
     const [natureOfTransaction, setNatureOfTransaction] = useState('');
-    const [igstRate, setIgstRate] = useState('0');
-    const [cgstRate, setCgstRate] = useState('0');
-    const [utgstRate, setUtgstRate] = useState('0');
+    const [igstRate, setIgstRate] = useState(0);
+    const [cgstRate, setCgstRate] = useState(0);
+    const [utgstRate, setUtgstRate] = useState(0);
     const [typeOfSupply, setTypeOfSupply] = useState('Services');
     const [accountHoldersName, setAccountHoldersName] = useState('');
     const [accountNumber, setAccountNumber] = useState('');
@@ -166,7 +167,7 @@ const NewLedgerCreate = () => {
         Bolivia: [],
         Botswana: ["Central", "Chobe", "Francistown", "Gaborone", "Ghanzi", "Jwaneng", "Kgalagadi", "Kweneng", "Lobatse", "Ngamiland", "North-East", "Orapa", "Selebi-Phikwe", "South-East", "Southern", "Sowa"],
         Brazil: [],
-        Burkina_Faso: [],
+        "Burkina Faso": [],
         Burundi: [],
         Cambodia: [],
         Cameroon: [],
@@ -177,8 +178,8 @@ const NewLedgerCreate = () => {
         Colombia: [],
         Cote : [],
         Cuba: [],
-        Czech_Republic: [],
-        Dominican_Republic: [],
+        "Czech Republic": [],
+        "Dominican Republic": [],
         Ecuador: [],
         Egypt: ["Alexnadria", "Aswan", "Asyut", "Beheira", "Beni suef", "Cairo", "Dakahlia", "Damietta", "Faiyum", "Gharbia", "Giza", "Isamailia", "Kafr El Sheikh", "Luxor", "Matruh", "Minya", "Monufia", "New Valley", "North Sinai", "Port Said", "Qalyubia", "Qena", "Red Sea", "Sharqia", "Sohang", "South Sinai", "Suez"],
         Ethiopia: [],
@@ -189,8 +190,8 @@ const NewLedgerCreate = () => {
         Guatemala: [],
         Guinea: [],
         Haiti: [],
-        Hong_Kong: ["Central and Western", "Eastern", "Islands", "Kowloon City", "Kwai Tsing", "Kwun Tong", "North", "Sai Kung", "Sham Shui Po", "Sha Tin", "Southern", "Tai Po", "Tsuen Wan", "Tuen Mun", "Wan Chai", "Wong Tai Sin", "Yau Tsim Mong", "Yuen Long"], 
-        India: ["Andaman & Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli & Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Ladakh", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttarakhand", "Uttar Pradesh", "West Bengal"],
+        "Hong Kong": ["Central and Western", "Eastern", "Islands", "Kowloon City", "Kwai Tsing", "Kwun Tong", "North", "Sai Kung", "Sham Shui Po", "Sha Tin", "Southern", "Tai Po", "Tsuen Wan", "Tuen Mun", "Wan Chai", "Wong Tai Sin", "Yau Tsim Mong", "Yuen Long"], 
+        "India": ["Andaman & Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra & Nagar Haveli & Daman & Diu", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu & Kashmir", "Jharkhand", "Karnataka", "Kerala", "Ladakh", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttarakhand", "Uttar Pradesh", "West Bengal"],
         Indonesia: ["Bali", "Banten", "Bengkulu", "DI Yogyakarta", "DKI Jakarta", "Gorontalo", "Jambi", "Jawa Barat", "Jawa Tengah", "Jawa Timur", "Kalimantan Barat", "Kalimantan Selatan", "Kalimantan Tengah", "Kalimantan Timur", "Kalimantan Utara", "Kepulauan Bangka Belitung", "Kepulauan Riau", "Lampung", "Maluku", "Maluku Utara", "Nangrroe Aceh Darussalam", "Nusa Tenggara Barat", "Nusa Tenggara Timur", "Papua", "Papua Barat", "Riau", "Sulawesi Barat", "Sulawesi Selatan", "Sulawesi Tengah", "Sulawesi Tenggara", "Sulawesi Utara", "Sumatera Barat", "Sumatera Selatan", "Sumatera Utara"],
         Iran: [],
         Iraq: [],
@@ -198,7 +199,7 @@ const NewLedgerCreate = () => {
         Japan: [],
         Kazakhstan: [],
         Kenya: ["Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo-Marakwet", "Embu", "Garissa", "Homa Bay", "Isiolo", "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale", "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Muranga", "Nairobi City", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita Taveta", "Tana River", "Tharaka Nithi", "Trans Nzoia", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"],
-        Kingdom_of_Bahrain: ["Capital", "Muharraq", "Northern", "Southern"],
+        "Kingdom of Bahrain": ["Capital", "Muharraq", "Northern", "Southern"],
         Kuwait: ["Al Ahmadi", "Al Asimah", "Al Farwaniyah", "Al Jahra", "Hawalli", "Mubarak Al-Kabeer"],
         Liberia: ["Bomi", "Bong", "Gbarpolu", "Grand Bassa", "Grand Cape Mount", "Grand Gedeh", "Grand Kru", "Lofa", "Margibi", "Maryland", "Montserrado", "Nimba", "Rivercess", "River Gee", "Sinoe"],
         Madagascar: [],
@@ -208,31 +209,31 @@ const NewLedgerCreate = () => {
         Mexico: [],
         Morocco: [],
         Mozambique: [],
-        Myanmar: ["Ayeyarwady", "Bago", "Chin", "Kachin", "Kayah", "Kayin", "Magway", "Mandalay", "Mon", "Naypyidaw", "Rakhine", "Sagaing", "Shan", "Tanintharyi", "Yangon"],
+        "Myanmar (Burma)": ["Ayeyarwady", "Bago", "Chin", "Kachin", "Kayah", "Kayin", "Magway", "Mandalay", "Mon", "Naypyidaw", "Rakhine", "Sagaing", "Shan", "Tanintharyi", "Yangon"],
         Nepal: ["Bagmati", "Far West", "Gandaki", "Janakpur", "Karnali", "Koshi", "Lumbini"],
         Netherlands: [],
         Niger: [],
         Nigeria: ["Abia", "Adamawa", "Akwa Ibom", "Anambra", "Bauchi", "Bayelsa", "Benue", "Borno", "Cross River", "Delta", "Ebonyl", "Edo", "Ekiti", "Enugu", "Gombe", "Imo", "Jigwa", "Kaduna", "Kano", "Katsina", "Kebbi", "Kogi", "Kwara", "Lagos", "Nasarawa", "Niger", "Ogun", "Ondo", "Osun", "Oyo", "Plateau", "Rivers", "Sokoto", "Taraba", "Yobe", "Zamfara"],
-        North_Korea: [],
+        "North Korea": [],
         Pakisthan: [],
         Peru: [],
         Philippines: ["Bicol Region", "Cagayan Valley", "Calabarzon", "Caraga Region", "Central Luzon", "Central Visayas", "Cordilera Administrative Region", "Davao Region", "Eastern Visayas", "Llocos Region", "National Capital Region", "Northern Mindanao", "Soccsksargen", "Southwestern Tagalog Region", "Western Visayas", "Zamboanga Peninsula"],
         Poland: [],
         Portugal: [],
         Qatar: ["Ad Dawhah", "Al Khawr wa adh Dhakhirah", "Al Wakrah", "Ar Rayyan", "Ash Shamal", "Ash Shihaniyah", "Az Zaayin", "Umm Salal"],
-        Republic_Of_The_CongoDemocratic: [],
+        "Republic Of The CongoDemocratic": [],
         Romania: [],
         Russia: [],
         Rwanda: [],
-        Saudi_Arabia: ["Al Madinah", "Al-Qassim", "Ash-Sharqiyyah", "Asir", "Ha'il", "Makkah", "Najran", "Riyadh", "Tabuk"],
+        "Saudi Arabia": ["Al Madinah", "Al-Qassim", "Ash-Sharqiyyah", "Asir", "Ha'il", "Makkah", "Najran", "Riyadh", "Tabuk"],
         Senegal: [],
         Singapore: [],
-        South_Africa: ["Eastern Cape", "Free State", "Gauteng", "KwaZulu-Natal", "Limpopo", "Mpumalanga", "Northern Cape", "North West", "Western Cape"],
-        South_Korea: [],
+        "South Africa": ["Eastern Cape", "Free State", "Gauteng", "KwaZulu-Natal", "Limpopo", "Mpumalanga", "Northern Cape", "North West", "Western Cape"],
+        "South Korea": [],
         Spain: [],
-        Sri_Lanka: ["Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo", "Galle", "Gampaha", "Hambantota", "Jaffna", "Kalutara", "Kandy", "Kegalle", "Kilinochchi", "Kurunegala", "Mannar", "Matale", "Matara", "Monaragala", "Mullaitivu", "Nuwara Eliya", "Polonnaruwa", "Puttalam", "Ratnapura", "Trincomalee", "Vavuniya"],
+        "Sri Lanka": ["Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo", "Galle", "Gampaha", "Hambantota", "Jaffna", "Kalutara", "Kandy", "Kegalle", "Kilinochchi", "Kurunegala", "Mannar", "Matale", "Matara", "Monaragala", "Mullaitivu", "Nuwara Eliya", "Polonnaruwa", "Puttalam", "Ratnapura", "Trincomalee", "Vavuniya"],
         Sudan: [],
-        Sultanate_of_Oman: ["Al Batinah North", "Al Batinah South", "Al Buraimi", "Al Dhahira", "Al Shariyah North", "Al Shariyah South", "Al Wusta", "Dakhiliya", "Dhofar", "Musandam", "Muscat"],
+        "Sultanate of Oman": ["Al Batinah North", "Al Batinah South", "Al Buraimi", "Al Dhahira", "Al Shariyah North", "Al Shariyah South", "Al Wusta", "Dakhiliya", "Dhofar", "Musandam", "Muscat"],
         Syria: [],
         Tanzania: ["Arusha", "Dar es Salaam", "Dodoma", "Geita", "Iringa", "Kagera", "Katavi", "Kigoma", "Kilimanjaro", "Lindi", "Manyara", "Mara", "Mbeya", "Morogoro", "Mtwara", "Mwanza", "Njombe", "Pemba North", "Pemba South", "Pwani", "Rukwa", "Ruvuma", "Shinyanga", "Simiyu", "Singida", "Songwe", "Tabora", "Tanga", "Zanzibar North", "Zanzibar South", "Zanzibar Urban West"],
         Thailand: ["Amnat Charoen", "Ang Thong", "Bangkok", "Bueng Kan", "Buriram", "Chachoengsao", "Chai Nat", "Chaiyaphum", "Chanthaburi", "Chiang Mai", "Chiang Rai", "Chonburi", "Chumphon", "Kalasin", "Kamphaeng Phet", "Kanchanaburi", "Khon Kaen", "Krabi", "Lampang", "Lamphun", "Loei", "Lopburi", "Mae Hong Son", "Maha Sarkham", "Mukdahan", "Nakhon Nayok", "Nakhon Pathom", "Nakhon Phanom", "Nakhon Ratchasima", "Nakhon Sawan", "Nakhon Si Thammarat", "Nan", "Narathiwat", "Nong Bua Lam Phu", "Nong Khai", "Nonthaburi", "Pathum Thani", "Pattani", "Phang Nga", "Phatthalung", "Phayao", "Phetchabun", "Phetchaburi", "Phichit", "Phitsanulok", "Phrae", "Phra Nakhon Si Ayutthaya", "Phuket", "Prachinburi", "Prachuap Khiri Khan", "Ranong", "Ratchaburi", "Rayong", "Roi Et", "Sa Kaeo", "Sakon Nakhon", "Samut Prakan", "Samut Sakhon", "Samut Songkhram", "Saraburi", "Satun", "Sing Buri", "Sisaket", "Songkhla", "Sukhothai", "Suphan Buri", "Surat Thani", "Surin", "Tak", "Trang", "Trat", "Ubon Ratchathani", "Udon Thani", "Uthai Thani", "Uttaradit", "Yala", "Yasothon" ],
@@ -254,7 +255,7 @@ const NewLedgerCreate = () => {
         ],
         UK: ["England", "Northern Ireland", "Scotland", "Wales"],
         Ukraine: [],
-        United_Staes_of_America: ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"],
+        "United States of America": ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"],
         Uzbekistan: [],
         Venezuela: [],
         Vietnam: [],
@@ -351,11 +352,16 @@ const NewLedgerCreate = () => {
     }
 
     useEffect(() => {
+
+        // Focus on the input when the component mounts
         inputRef.current.focus();
-        hideElements();
-        handleUnderGroupChange({ target: { value: underGroup } });
 
+        
 
+        // Initialize underGroup and handle changes accordingly
+        setUnderGroup('Capital Account');
+        handleUnderGroupChange('Capital Account');
+        
 
         const handleFocus = () => {
             console.log("Input Focused");
@@ -367,17 +373,20 @@ const NewLedgerCreate = () => {
         const handleBlur = () => {
             console.log("Input Blured");
 
-            setShowMirroringOptions(false);
+            // Hide options only if the blur is not related to the options
+            if (!e.currentTarget.contains(e.relatedTarget)) {
+                setShowMirroringOptions(false);
+            }
         };
 
         const inputElement = underGroupRef.current;
 
         inputElement.addEventListener('focus', handleFocus);
-        // inputElement.addEventListener('blur', handleBlur);
+        inputElement.addEventListener('blur', handleBlur, true);
 
         return () => {
             inputElement.removeEventListener('focus', handleFocus);
-            inputElement.removeEventListener('blur', handleBlur);
+            inputElement.removeEventListener('blur', handleBlur, true);
         };
 
     }, []);
@@ -388,7 +397,11 @@ const NewLedgerCreate = () => {
         setSubUnder("");
         updateSubUnder(newUnderGroup); // <-- Call the function like this
 
+        // Hide all elements initially
         hideElements();
+
+        // Hide mirroring options after selection
+        setShowMirroringOptions(false); // Hide options after selection
        
         switch(newUnderGroup) {
             case "Capital Account":
@@ -539,14 +552,7 @@ const NewLedgerCreate = () => {
  
 
 
-    window.onload = function () {
-        const underGroupSelect = document.getElementById("underGroup");
     
-        underGroupSelect.addEventListener("change", handleUnderGroupChange);
-    
-        // Initial hide/show based on the selected value
-        handleUnderGroupChange({ target: { value: underGroupSelect.value } });
-    }
 
 
     const updateSubUnder = (underGroup) => {
@@ -682,6 +688,8 @@ const NewLedgerCreate = () => {
         setStateName(e.target.value);
       }
 
+      
+
 
     
 
@@ -781,9 +789,18 @@ const NewLedgerCreate = () => {
                                 <div className='ml-2'>
 
                                     <label htmlFor="underGroup" className='mr-[225px]' >Under</label>
-                                    : <input type="text" id='underGroup' name='underGroup' className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' value={underGroup} onChange={(e) => setUnderGroup(e.target.value)}  ref={underGroupRef} onKeyDown={(e) => { if (e.key === 'Tab') { hanldeTabPress(e); } else if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, underGroupRef, underGroup); } }} readOnly />
+                                    : <input type="text" id='underGroup' name='underGroup' className='ml-2 h-5 capitalize font-medium pl-1 text-sm focus:bg-yellow-200 w-1/3 focus:border focus:border-blue-500 focus:outline-none' value={underGroup} onChange={(e) => setUnderGroup(e.target.value)}  ref={underGroupRef} onKeyDown={(e) => { if (e.key === 'Tab') { hanldeTabPress(e); } else if (e.key === 'Enter') { e.preventDefault(); handleKeyPress(e, underGroupRef, underGroup); } }}  />
+                                    
 
-
+                                    {/* Conditional rendering of MirroringOptions */}
+                                    {showMirroringOptions && (
+                                        <div className='mirroring-options'>
+                                            {/* Your mirroring options go here */}
+                                                
+                                                <MirroringOptions handleUnderGroupChange={handleUnderGroupChange} />
+                                        </div>
+                                    )} 
+                                
                                 </div>
                                 
 
@@ -1202,14 +1219,7 @@ const NewLedgerCreate = () => {
                         </div>
 
 
-                        {/* Conditional rendering of MirroringOptions */}
-                        {showMirroringOptions && (
-                            <div className='mirroring-options'>
-                                {/* Your mirroring options go here */}
-                                    
-                                    <MirroringOptions handleUnderGroupChange={handleUnderGroupChange} />
-                            </div>
-                        )} 
+                        
 
                         
                         
